@@ -37,7 +37,7 @@ module.exports = class {
 
   paginate() {
     const currentPage = this.request.page * 1 || 1;
-    const limit = 2;
+    const limit = 18;
     this.query = this.query.skip((currentPage - 1) * limit).limit(limit);
     return this;
   }

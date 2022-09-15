@@ -7,6 +7,8 @@ const xss = require("xss-clean");
 const cookieParser = require("cookie-parser");
 
 const productRouter = require("./routers/productRouter");
+const userRouter = require("./routers/userRouter");
+const errorController = require("./controllers/errorController");
 
 const app = express();
 
@@ -41,5 +43,17 @@ app.use(
 
 // Routes
 app.use("/api/products", productRouter);
+app.use("/api/users", userRouter);
+
+// Error handler
+app.use(errorController);
+
+// Not found
+app.use("*", (req, res) => {
+  res.status(404).json({
+    status: "fail",
+    message: "Path not found on server",
+  });
+});
 
 module.exports = app;
