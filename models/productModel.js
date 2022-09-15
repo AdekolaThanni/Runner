@@ -17,6 +17,7 @@ const Schema = new mongoose.Schema({
   brand: {
     type: String,
     required: true,
+    lowercase: true,
   },
   ratingsCount: Number,
   ratingsAverage: Number,
