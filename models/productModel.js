@@ -21,6 +21,7 @@ const Schema = new mongoose.Schema({
   },
   ratingsCount: Number,
   ratingsAverage: Number,
+  images: [String],
 });
 
 module.exports = mongoose.model("Product", Schema);
