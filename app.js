@@ -8,6 +8,7 @@ const cookieParser = require("cookie-parser");
 
 const productRouter = require("./routers/productRouter");
 const userRouter = require("./routers/userRouter");
+const cartRouter = require("./routers/cartRouter");
 const errorController = require("./controllers/errorController");
 
 const app = express();
@@ -44,6 +45,7 @@ app.use(
 // Routes
 app.use("/api/products", productRouter);
 app.use("/api/users", userRouter);
+app.use("/api/cart", cartRouter);
 
 // Error handler
 app.use(errorController);
