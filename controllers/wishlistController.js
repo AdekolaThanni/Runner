@@ -21,7 +21,7 @@ exports.addProductToWishlist = catchErrors(async (req, res, next) => {
     !req.user.wishlist.some((product) => product.toString() === req.params.id)
   ) {
     req.user.wishlist.push(req.params.id);
-    req.user.save({
+    await req.user.save({
       validateBeforeSave: false,
     });
   }
@@ -39,7 +39,7 @@ exports.removeProductFromWishlist = catchErrors(async (req, res, next) => {
     (product) => product.toString() !== req.params.id
   );
 
-  req.user.save({
+  await req.user.save({
     validateBeforeSave: false,
   });
 

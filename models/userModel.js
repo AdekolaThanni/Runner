@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcrypt");
+const crypto = require("crypto");
 
 const Schema = new mongoose.Schema({
   firstName: {
@@ -27,7 +28,6 @@ const Schema = new mongoose.Schema({
   },
   confirmPassword: {
     type: String,
-    required: true,
     validate: {
       validator: function (givenConfirmation) {
         return this.password === givenConfirmation;
@@ -49,6 +49,19 @@ Schema.pre("save", async function (next) {
 // Verify Password
 Schema.method("verifyPassword", async function (realPassword, givenPassword) {
   return await bcrypt.compare(givenPassword, realPassword);
+});
+
+// Create password reset token
+Schema.method("createPasswordResetToken", function () {
+  const token = crypto.randomBytes(32).toString("hex");
+
+  this.passwordResetToken = crypto
+    .createHash("sha256")
+    .update(token)
+    .digest("hex");
+
+  this.passwordResetTokenExpires = Date.now() + 10 * 60 * 1000;
+  return token;
 });
 
 module.exports = mongoose.model("User", Schema);

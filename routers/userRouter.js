@@ -6,9 +6,15 @@ const router = express.Router();
 
 router.route("/register").post(userController.register);
 router.route("/login").post(userController.login);
+router.route("/forgotPassword").post(userController.forgotPassword);
+router.route("/resetPassword/:token").post(userController.resetPassword);
 
 // The following routes are protected
 router.use(userController.protect);
+
+router.route("/logout").get(userController.logout);
+router.route("/").patch(userController.updateProfile);
+router.route("/updatePassword").post(userController.updatePassword);
 
 router.route("/wishlist").get(wishlistController.getUserWishlist);
 
