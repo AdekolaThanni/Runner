@@ -1,8 +1,29 @@
+const Cart = require("../models/cartModel");
 const catchErrors = require("../utilities/catchErrors");
 const constructError = require("../utilities/constructError");
 
+const checkCartInCookies = (req) => {
+  const cookie = req.cookies?.runnerCart;
+  if (!cookie || !JSON.parse(cookie)) {
+    return;
+  } else {
+    return JSON.parse(cookie);
+  }
+};
+
 exports.getCart = catchErrors(async (req, res, next) => {
-  const cart = req.cookies.runnerCart ? JSON.parse(req.cookies.runnerCart) : [];
+  const cartId = checkCartInCookies(req);
+
+  if (!cartId)
+    return res.status(200).json({
+      status: "success",
+      message: "Your cart is empty",
+    });
+
+  const cart = await Cart.findById(cartId).populate(
+    "products.product",
+    "name price brand gender"
+  );
 
   res.status(200).json({
     status: "success",
@@ -20,29 +41,29 @@ exports.addProductToCart = catchErrors(async (req, res, next) => {
   if (!id || !quantity)
     return next(new constructError(400, "Product details are invalid"));
 
-  if (Math.abs(quantity) > 5)
-    return next(
-      new constructError(400, "Only a maximum of 5 products can be purchased")
-    );
-
   const newProduct = {
-    id,
-    quantity: Math.abs(quantity),
+    product: id,
+    quantity,
   };
 
   let newCart;
-  if (req.cookies?.runnerCart) {
-    const cart = JSON.parse(req.cookies.runnerCart);
-    if (!cart.some((product) => product.id === newProduct.id)) {
-      newCart = cart.concat(newProduct);
-    } else {
-      newCart = cart;
+
+  const cartId = checkCartInCookies(req);
+
+  if (cartId) {
+    newCart = await Cart.findById(cartId);
+    if (
+      !newCart.products.some(
+        (prod) => prod.product.toString() === newProduct.product
+      )
+    ) {
+      newCart.products.push(newProduct);
+      await newCart.save();
     }
   } else {
-    newCart = [newProduct];
+    newCart = await Cart.create({ products: [newProduct] });
+    res.cookie("runnerCart", JSON.stringify(newCart._id));
   }
-
-  res.cookie("runnerCart", JSON.stringify(newCart));
 
   res.status(200).json({
     status: "success",
@@ -53,14 +74,18 @@ exports.addProductToCart = catchErrors(async (req, res, next) => {
 });
 
 exports.removeProductFromCart = catchErrors(async (req, res, next) => {
-  let cart = [];
-
-  if (req.cookies.runnerCart) {
-    cart = JSON.parse(req.cookies.runnerCart).filter(
-      (product) => product.id !== req.params.id
+  let cart = "Your cart is empty";
+  const cartId = checkCartInCookies(req);
+  if (cartId) {
+    cart = await Cart.findById(cartId);
+    cart.products = cart.products.filter(
+      (prod) => prod.product.toString() !== req.params.id
     );
-
-    res.cookie("runnerCart", JSON.stringify(cart));
+    await cart.save();
+    if (!cart.products.length) {
+      await Cart.deleteOne({ _id: cart._id });
+      res.cookie("runnerCart", JSON.stringify(""));
+    }
   }
 
   res.status(204).json({
@@ -75,23 +100,24 @@ exports.updateProductInCart = catchErrors(async (req, res, next) => {
   if (!req.body.quantity)
     return next(new constructError(400, "Product update fields are empty"));
 
-  if (Math.abs(req.body.quantity) > 5)
-    return next(
-      new constructError(400, "Only a maximum of 5 products can be purchased")
-    );
+  const cartId = checkCartInCookies(req);
 
-  let cart = req.cookies.runnerCart ? JSON.parse(req.cookies.runnerCart) : [];
+  if (!cartId) {
+    return next(new constructError(400, "You cart is empty"));
+  }
 
-  cart = cart.map((product) => {
-    if (product.id === req.params.id) {
+  const cart = await Cart.findById(cartId);
+
+  cart.products = cart.products.map((product) => {
+    if (product.product.toString() === req.params.id) {
       return {
-        id: req.params.id,
-        quantity: Math.abs(req.body.quantity),
+        product: req.params.id,
+        quantity: req.body.quantity,
       };
     } else return product;
   });
 
-  res.cookie("runnerCart", JSON.stringify(cart));
+  await cart.save();
 
   res.status(200).json({
     status: "success",
