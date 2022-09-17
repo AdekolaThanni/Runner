@@ -22,6 +22,7 @@ const Schema = new mongoose.Schema({
   ratingsCount: Number,
   ratingsAverage: Number,
   images: [String],
+  reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Review" }],
 });
 
 module.exports = mongoose.model("Product", Schema);

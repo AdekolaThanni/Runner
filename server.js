@@ -13,10 +13,7 @@ process.on("unhandledException", (err) => {
 
 // Connect to database
 mongoose
-  .connect(process.env.DATABASE_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(process.env.DATABASE_URL)
   .then(() => console.log("Database connected..."))
   .catch((err) => console.log(err));
 

@@ -50,4 +50,14 @@ module.exports = class {
 
     return this;
   }
+
+  search() {
+    if (this.request.search) {
+      this.query = this.query.find({
+        $text: { $search: this.request.search },
+      });
+    }
+
+    return this;
+  }
 };
