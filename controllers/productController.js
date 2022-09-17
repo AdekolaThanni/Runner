@@ -9,9 +9,8 @@ exports.getAllProducts = catchErrors(async (req, res, next) => {
     .search()
     .filter()
     .sort()
-    .paginate()
-    .limitFields()
-    .query.populate("reviews");
+    .paginate(18)
+    .limitFields().query;
 
   res.status(200).json({
     status: "success",
@@ -43,12 +42,48 @@ exports.getSingleProduct = catchErrors(async (req, res, next) => {
   });
 });
 
-exports.getReview = catchErrors(async (req, res, next) => {
-  const { name, comment, rating } = req.body;
-  const review = await Review.create({ name, comment, rating });
-  const product = await Products.findById(req.params.id);
-  product.reviews.unshift(review._id);
+exports.getProductReviews = catchErrors(async (req, res, next) => {
+  const reviews = await new apiQuery(
+    Review.find({ product: req.params.id }),
+    req.query
+  )
+    .sort()
+    .paginate(10).query;
 
+  res.status(200).json({
+    status: "success",
+    data: {
+      results: reviews.length,
+      reviews,
+    },
+  });
+});
+
+exports.createProductReview = catchErrors(async (req, res, next) => {
+  const { name, comment, rating } = req.body;
+  const product = await Products.findById(req.params.id);
+  const review = await Review.create({
+    name,
+    comment,
+    rating,
+    product: product._id,
+  });
+  const [ratingsDetails] = await Review.aggregate([
+    {
+      $match: {
+        product: product._id,
+      },
+    },
+    {
+      $group: {
+        _id: null,
+        ratingsCount: { $sum: 1 },
+        ratingsAverage: { $avg: "$rating" },
+      },
+    },
+  ]);
+
+  product.updateRatings(review._id, ratingsDetails);
   await product.save();
 
   res.status(200).json({

@@ -19,10 +19,25 @@ const Schema = new mongoose.Schema({
     required: true,
     lowercase: true,
   },
-  ratingsCount: Number,
+  ratingsCount: {
+    type: Number,
+    default: 0,
+  },
   ratingsAverage: Number,
   images: [String],
-  reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Review" }],
+});
+
+Schema.pre("save", function (next) {
+  if (!this.isModified("reviews.length")) return next();
+  this.ratingsCount = this.reviews.length;
+
+  next();
+});
+
+Schema.method("updateRatings", function (id, rating) {
+  this.reviews.unshift(id);
+  this.ratingsCount = rating.ratingsCount;
+  this.ratingsAverage = rating.ratingsAverage.toFixed(1);
 });
 
 module.exports = mongoose.model("Product", Schema);

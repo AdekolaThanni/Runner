@@ -6,14 +6,15 @@ module.exports = class {
 
   filter() {
     const queryObject = { ...this.request };
-    const includedFields = ["brand", "price", "ratingsAverage", "gender"];
+    const excludedFields = ["sort", "limit", "search", "page"];
     // Remove fields that do not filter
     Object.keys(queryObject).forEach((key) => {
+      if (excludedFields.includes(key)) {
+        delete queryObject[key];
+        return;
+      }
       if (key === "brand" || key === "gender") {
         queryObject[key] = queryObject[key].toLowerCase();
-      }
-      if (!includedFields.includes(key)) {
-        delete queryObject[key];
       }
     });
     const transformedQuery = JSON.parse(
@@ -35,9 +36,8 @@ module.exports = class {
     return this;
   }
 
-  paginate() {
+  paginate(limit) {
     const currentPage = this.request.page * 1 || 1;
-    const limit = 18;
     this.query = this.query.skip((currentPage - 1) * limit).limit(limit);
     return this;
   }

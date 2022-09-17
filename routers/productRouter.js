@@ -7,6 +7,9 @@ router.route("/").get(productController.getAllProducts);
 
 router.route("/:id").get(productController.getSingleProduct);
 
-router.route("/review/:id").post(productController.getReview);
+router
+  .route("/review/:id")
+  .get(productController.getProductReviews)
+  .post(productController.createProductReview);
 
 module.exports = router;

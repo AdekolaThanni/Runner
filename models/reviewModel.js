@@ -19,6 +19,7 @@ const Schema = new mongoose.Schema({
     min: [1, "Minimum rating is 1"],
     max: [5, "Maximum rating is 5"],
   },
+  product: mongoose.Types.ObjectId,
 });
 
 module.exports = mongoose.model("Review", Schema);
