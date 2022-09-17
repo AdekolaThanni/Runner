@@ -27,13 +27,6 @@ const Schema = new mongoose.Schema({
   images: [String],
 });
 
-Schema.pre("save", function (next) {
-  if (!this.isModified("reviews.length")) return next();
-  this.ratingsCount = this.reviews.length;
-
-  next();
-});
-
 Schema.method("updateRatings", function (id, rating) {
   this.reviews.unshift(id);
   this.ratingsCount = rating.ratingsCount;

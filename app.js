@@ -10,6 +10,7 @@ const productRouter = require("./routers/productRouter");
 const userRouter = require("./routers/userRouter");
 const cartRouter = require("./routers/cartRouter");
 const errorController = require("./controllers/errorController");
+const { takePayment } = require("./controllers/paymentController");
 
 const app = express();
 
@@ -46,6 +47,7 @@ app.use(
 app.use("/api/products", productRouter);
 app.use("/api/users", userRouter);
 app.use("/api/cart", cartRouter);
+app.post("/api/checkout", takePayment);
 
 // Error handler
 app.use(errorController);

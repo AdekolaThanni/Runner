@@ -1,3 +1,5 @@
+// Configure environment files
+require("dotenv").config({ path: "./.env" });
 const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
@@ -179,7 +181,7 @@ exports.forgotPassword = catchErrors(async (req, res, next) => {
   } catch (error) {
     user.passwordResetToken = undefined;
     user.passwordResetTokenExpires = undefined;
-    await user.save();
+    await user.save({ validateBeforeSave: false });
 
     return next(
       new constructError(

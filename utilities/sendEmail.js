@@ -1,3 +1,5 @@
+// Configure environment files
+require("dotenv").config({ path: "./.env" });
 const nodemailer = require("nodemailer");
 
 module.exports = async (options) => {
@@ -18,8 +20,6 @@ module.exports = async (options) => {
     subject: options.subject,
     text: options.message,
   };
-
-  console.log(mailOptions);
 
   await transporter.sendMail(mailOptions);
 };
