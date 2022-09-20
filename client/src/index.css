@@ -4,10 +4,18 @@
 
 @layer base {
   html {
-    @apply text-[62.5%];
+    @apply !text-[62.5%];
   }
 
   body {
-    @apply font-serif;
+    @apply font-sans text-sm;
+  }
+
+  svg {
+    @apply w-[2rem] h-[2rem];
+  }
+
+  h1 {
+    @apply text-lg uppercase mt-xl font-semibold px-[5rem];
   }
 }
