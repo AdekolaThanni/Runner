@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { queryActions } from "../../stores/queryStore/queryReducer";
+import useQuery from "../../hooks/useQuery";
+import { useSelector } from "react-redux";
 
 function Selection({ option, type, addOption, removeOption, initialActive }) {
   const [active, setActive] = useState(initialActive);
@@ -61,8 +61,7 @@ function Dropdown({ placeholder, options, type }) {
   const [visibility, setVisibility] = useState(false);
   const mainTitle = placeholder.split(" ")[0].toLowerCase();
   const modal = useRef();
-
-  const dispatch = useDispatch();
+  const { addOption, removeOption, clearFilter, initialize } = useQuery();
   const activeOptions = useSelector((state) => state[mainTitle]);
 
   useEffect(() => {
@@ -72,6 +71,8 @@ function Dropdown({ placeholder, options, type }) {
         setVisibility(false);
       }
     });
+
+    initialize(mainTitle);
   }, []);
 
   return (
@@ -121,7 +122,10 @@ function Dropdown({ placeholder, options, type }) {
           </svg>
           {/* Clear */}
           {!!activeOptions.length && (
-            <div className="flex items-center gap-xs p-xs pl-[3rem] text-[1.3rem] font-bold capitalize">
+            <div
+              onClick={clearFilter}
+              className="flex items-center gap-xs p-xs pl-[3rem] text-[1.3rem] font-bold capitalize"
+            >
               <span className="cursor-pointer">Clear</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -130,7 +134,6 @@ function Dropdown({ placeholder, options, type }) {
                 preserveAspectRatio="xMidYMid meet"
                 viewBox="0 0 24 24"
                 className="cursor-pointer"
-                onClick={() => dispatch(queryActions.clearFilter(mainTitle))}
               >
                 <path
                   fill="currentColor"
@@ -144,12 +147,8 @@ function Dropdown({ placeholder, options, type }) {
               key={index}
               option={option}
               type={type}
-              addOption={() =>
-                dispatch(queryActions.addToFilters([mainTitle, option]))
-              }
-              removeOption={() =>
-                dispatch(queryActions.removeFromFilters([mainTitle, option]))
-              }
+              addOption={() => addOption(mainTitle, option)}
+              removeOption={() => removeOption(mainTitle, option)}
               initialActive={activeOptions.includes(option)}
             />
           ))}

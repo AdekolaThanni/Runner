@@ -13,8 +13,8 @@ module.exports = class {
         delete queryObject[key];
         return;
       }
-      if (key === "brand" || key === "gender") {
-        queryObject[key] = queryObject[key].toLowerCase();
+      if (key === "brand" || key === "category") {
+        queryObject[key] = queryObject[key];
       }
     });
     const transformedQuery = JSON.parse(

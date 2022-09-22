@@ -1,9 +1,9 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { queryActions } from "../../stores/queryStore/queryReducer";
+import { useSelector } from "react-redux";
+import useQuery from "../../hooks/useQuery";
 
 function FilterSummary() {
-  const dispatch = useDispatch();
+  const { clearQuery, removeOption } = useQuery();
   const query = useSelector((state) => state);
   const checkQueryLength = (query) =>
     Object.keys(query).flatMap((filter) => query[filter]).length;
@@ -31,9 +31,7 @@ function FilterSummary() {
                 preserveAspectRatio="xMidYMid meet"
                 viewBox="0 0 24 24"
                 className="cursor-pointer"
-                onClick={() =>
-                  dispatch(queryActions.removeFromFilters([filter, option]))
-                }
+                onClick={() => removeOption(filter, option)}
               >
                 <path
                   fill="currentColor"
@@ -44,7 +42,7 @@ function FilterSummary() {
           ))}
 
         <div
-          onClick={() => dispatch(queryActions.clearQuery())}
+          onClick={clearQuery}
           className="flex items-center gap-xs p-xs text-[1.3rem] font-bold capitalize"
         >
           <span className="cursor-pointer">Clear</span>

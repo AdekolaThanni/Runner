@@ -7,7 +7,7 @@ import WishlistIcon from "../UI/WishlistIcon";
 
 function Header() {
   return (
-    <div className="bg-black text-white px-[5rem] py-[2rem] flex justify-between items-center">
+    <header className="bg-black text-white px-[5rem] py-[2rem] flex justify-between items-center">
       <Logo />
       <div className="flex items-center gap-[2.5rem]">
         <SearchBar />
@@ -15,7 +15,7 @@ function Header() {
         <BagIcon />
         <UserIcon />
       </div>
-    </div>
+    </header>
   );
 }
 

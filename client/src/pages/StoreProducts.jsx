@@ -3,14 +3,18 @@ import Dropdown from "../components/UI/Dropdown";
 import { Provider } from "react-redux";
 import queryStore from "../stores/queryStore/queryStore";
 import FilterSummary from "../components/UI/FilterSummary";
+import { Await, useLoaderData } from "react-router-dom";
+import ProductsSkeleton from "../components/skeletons/ProductsSkeleton";
+import Products from "../components/layout/Products";
 
 function StoreProducts() {
+  const data = useLoaderData();
   return (
     <Provider store={queryStore}>
       <h1>Shop All shoes</h1>
 
       {/* Filter box */}
-      <div className="border-y border-grayFaint mt-lg px-[5rem] flex items-center py-[2rem] gap-lg">
+      <div className="bg-white z-10 border-y border-grayFaint mt-lg px-[5rem] flex items-center py-[2rem] gap-lg sticky top-0 left-0">
         <svg
           width="21"
           height="22"
@@ -50,7 +54,7 @@ function StoreProducts() {
         />
         <Dropdown
           placeholder="Brand"
-          options={["Nike", "Puma", "Loius Vuitton", "Skechers", "New Balance"]}
+          options={["Nike", "Puma", "Louis Vuitton", "Skechers", "New Balance"]}
           type="checkbox"
         />
         <Dropdown
@@ -73,6 +77,14 @@ function StoreProducts() {
       </div>
       {/* Filter summary */}
       <FilterSummary />
+      <React.Suspense fallback={<ProductsSkeleton />}>
+        <Await
+          resolve={data.products}
+          errorElement={<div className="text-lg">Error occured</div>}
+        >
+          {({ data: { products } }) => <Products products={products} />}
+        </Await>
+      </React.Suspense>
     </Provider>
   );
 }

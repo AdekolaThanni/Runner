@@ -25,6 +25,7 @@ const querySlice = createSlice({
     clearQuery: (state) => {
       return initialState;
     },
+    getURLQuery: (state) => {},
   },
 });
 

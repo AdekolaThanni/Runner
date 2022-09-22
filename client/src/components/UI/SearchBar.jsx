@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useRef } from "react";
+import { useSearchParams } from "react-router-dom";
 
 function SearchBar() {
+  const searchInput = useRef();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const searchFilter = (searchText) => {
+    searchParams.set("search", searchText);
+    setSearchParams(searchParams.toString());
+  };
   return (
-    <div className="border border-darkGray flex items-center px-xs gap-sm">
+    <form
+      onSubmit={(event) => {
+        event.preventDefault();
+        searchFilter(searchInput.current.value);
+        searchInput.current.value = "";
+      }}
+      className="border border-darkGray flex items-center px-xs gap-sm"
+    >
       {/* Search Icon */}
       <div className="">
         <svg
@@ -23,8 +38,10 @@ function SearchBar() {
         type="text"
         className="bg-transparent w-[20rem] h-[4rem] placeholder:text-darkGray focus:outline-none uppercase"
         placeholder="SEARCH RUNNER"
+        ref={searchInput}
+        value={searchParams.get("search")}
       />
-    </div>
+    </form>
   );
 }
 
