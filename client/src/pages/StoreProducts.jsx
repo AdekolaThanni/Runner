@@ -3,12 +3,13 @@ import Dropdown from "../components/UI/Dropdown";
 import { Provider } from "react-redux";
 import queryStore from "../stores/queryStore/queryStore";
 import FilterSummary from "../components/UI/FilterSummary";
-import { Await, useLoaderData } from "react-router-dom";
+import { Await, useLoaderData, useNavigation } from "react-router-dom";
 import ProductsSkeleton from "../components/skeletons/ProductsSkeleton";
 import Products from "../components/layout/Products";
 
 function StoreProducts() {
   const data = useLoaderData();
+  const navigation = useNavigation();
   return (
     <Provider store={queryStore}>
       <h1>Shop All shoes</h1>
@@ -85,6 +86,8 @@ function StoreProducts() {
           {({ data: { products } }) => <Products products={products} />}
         </Await>
       </React.Suspense>
+      {navigation.state === "loading" &&
+        navigation.location.pathname === "/" && <ProductsSkeleton />}
     </Provider>
   );
 }

@@ -12,16 +12,16 @@ exports.getAllProducts = catchErrors(async (req, res, next) => {
     .paginate(18)
     .limitFields().query;
 
-  setTimeout(() => {
-    res.status(200).json({
-      status: "success",
-      data: {
-        results: products.length,
-        page: req.query.page || 1,
-        products,
-      },
-    });
-  }, 10000);
+  const results = await Products.countDocuments();
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      results,
+      page: req.query.page || 1,
+      products,
+    },
+  });
 });
 
 exports.getSingleProduct = catchErrors(async (req, res, next) => {

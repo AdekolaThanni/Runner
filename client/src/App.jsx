@@ -7,13 +7,11 @@ import AppSkeleton from "./components/skeletons/AppSkeleton";
 function App() {
   return (
     <React.Suspense fallback={<AppSkeleton />}>
-      <div className="">
-        <Header />
-        <main className="min-h-[98vh] relative">
-          <Outlet />
-        </main>
-        <Footer />
-      </div>
+      <Header />
+      <main className="min-h-[95vh] relative">
+        <Outlet />
+      </main>
+      <Footer />
     </React.Suspense>
   );
 }

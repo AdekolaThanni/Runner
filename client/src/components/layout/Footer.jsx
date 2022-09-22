@@ -2,7 +2,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="bg-black text-darkGray py-[2rem] flex justify-center gap-xs mt-lg">
+    <footer className="bg-black text-darkGray py-[4rem] flex justify-center gap-xs mt-[15rem]">
       <span className="">Terms & Conditions</span>
       <span className="">|</span>
       <span className="">Privacy Policy</span>
