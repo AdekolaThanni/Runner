@@ -126,7 +126,6 @@ const useQuery = () => {
     dispatch(queryActions.clearFilter(mainFilter));
     deleteFilterOperation(mainFilter);
     searchParams.delete("page");
-
     setSearchParams(searchParams.toString());
   };
 

@@ -6,7 +6,12 @@ function SearchBar() {
   const [searchValue, setSearchValue] = useState(searchParams.get("search"));
 
   const searchFilter = (searchText) => {
-    searchParams.set("search", searchText);
+    searchParams.delete("page");
+    if (!searchText) {
+      searchParams.delete("search");
+    } else {
+      searchParams.set("search", searchText);
+    }
     setSearchParams(searchParams.toString());
   };
 

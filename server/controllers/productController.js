@@ -17,8 +17,6 @@ exports.getAllProducts = catchErrors(async (req, res, next) => {
     .filter()
     .query.countDocuments();
 
-  if (!results) return next(new constructError(404, "No products found"));
-
   res.status(200).json({
     status: "success",
     data: {

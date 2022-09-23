@@ -8,7 +8,7 @@
   }
 
   body {
-    @apply font-sans text-sm;
+    @apply font-sans text-sm overflow-x-hidden;
   }
 
   svg {
@@ -16,6 +16,21 @@
   }
 
   h1 {
-    @apply text-lg uppercase mt-xl font-semibold px-[5rem];
+    @apply text-lg uppercase mt-xl font-semibold;
+  }
+}
+
+@layer components {
+  .double-lines::before,
+  .double-lines::after {
+    content: "";
+    @apply block w-screen bg-grayFaint h-[1px] absolute;
+  }
+
+  .double-lines::before {
+    @apply top-0 left-[50%] translate-x-[-50%];
+  }
+  .double-lines::after {
+    @apply bottom-0 left-[50%] translate-x-[-50%];
   }
 }

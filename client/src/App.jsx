@@ -8,7 +8,7 @@ function App() {
   return (
     <React.Suspense fallback={<AppSkeleton />}>
       <Header />
-      <main className="min-h-[95vh] relative">
+      <main className="min-h-[95vh] relative px-[5rem]">
         <Outlet />
       </main>
       <Footer />

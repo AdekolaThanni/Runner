@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import { useNavigation, useSearchParams } from "react-router-dom";
 import SingleProduct from "./SingleProduct";
 
-function Products({ products, results, page }) {
-  const [allProducts, setAllProducts] = useState(products);
+function Products({ products, results, uniqueKey }) {
+  const [allProducts, setAllProducts] = useState([]);
   const navigation = useNavigation();
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -19,12 +19,14 @@ function Products({ products, results, page }) {
   };
 
   useEffect(() => {
-    if (page > 1) {
-      setAllProducts((prevState) => prevState.concat(products));
-    } else {
-      setAllProducts(products);
+    if (typeof uniqueKey === "number") {
+      if (searchParams.get("page")) {
+        setAllProducts((prevState) => prevState.concat(products));
+      } else {
+        setAllProducts(products);
+      }
     }
-  }, [page]);
+  }, [uniqueKey]);
 
   return (
     (navigation.state === "idle" ||
@@ -34,10 +36,12 @@ function Products({ products, results, page }) {
         onViewportLeave={addProducts}
         viewport={{ margin: "-90% 0px 0px" }}
       >
-        <h1 className="text-md">{results} Products</h1>
-        <div className="grid grid-cols-3 px-[5rem] gap-[3rem] my-md">
-          {allProducts.map((product) => (
-            <SingleProduct key={product._id} product={product} />
+        <h1 className="text-md">
+          {results ? `${results} Products` : "No Products Found"}
+        </h1>
+        <div className="grid grid-cols-3 gap-[3rem] my-md">
+          {allProducts.map((product, index) => (
+            <SingleProduct key={index} product={product} />
           ))}
         </div>
       </motion.div>

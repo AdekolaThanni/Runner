@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import Dropdown from "../components/UI/Dropdown";
 import { Provider } from "react-redux";
 import queryStore from "../stores/queryStore/queryStore";
@@ -6,17 +7,25 @@ import FilterSummary from "../components/UI/FilterSummary";
 import { Await, useLoaderData, useNavigation } from "react-router-dom";
 import ProductsSkeleton from "../components/skeletons/ProductsSkeleton";
 import Products from "../components/layout/Products";
-import ProductsError from "../components/errors/ProductsError";
 
 function StoreProducts() {
   const data = useLoaderData();
   const navigation = useNavigation();
+
   return (
     <Provider store={queryStore}>
+      <Helmet>
+        <title>Runner | Shop All Shoes</title>
+        <meta
+          name="description"
+          content="All shoes you need, Sneakers, Canvas, Leather Shoes and More..."
+        />
+      </Helmet>
+
       <h1>Shop All shoes</h1>
 
       {/* Filter box */}
-      <div className="bg-white z-10 border-y border-grayFaint mt-lg px-[5rem] flex items-center py-[2rem] gap-lg sticky top-0 left-0">
+      <div className="bg-white z-10 mt-lg flex items-center py-[2rem] gap-lg sticky top-0 left-0 double-lines">
         <svg
           width="21"
           height="22"
@@ -80,9 +89,20 @@ function StoreProducts() {
       {/* Filter summary */}
       <FilterSummary />
       <React.Suspense fallback={<ProductsSkeleton />}>
-        <Await resolve={data.products} errorElement={<ProductsError />}>
-          {({ data: { products, results, page } }) => (
-            <Products products={products} results={results} page={page} />
+        <Await
+          resolve={data.products}
+          errorElement={
+            <div className="text-md mt-xl uppercase font-bold">
+              Please try again
+            </div>
+          }
+        >
+          {({ data: { products, results } }) => (
+            <Products
+              products={products}
+              results={results}
+              uniqueKey={navigation.state === "idle" && Date.now()}
+            />
           )}
         </Await>
       </React.Suspense>

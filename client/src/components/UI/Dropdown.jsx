@@ -123,7 +123,7 @@ function Dropdown({ placeholder, options, type }) {
           {/* Clear */}
           {!!activeOptions.length && (
             <div
-              onClick={clearFilter}
+              onClick={() => clearFilter(mainTitle)}
               className="flex items-center gap-xs p-xs pl-[3rem] text-[1.3rem] font-bold capitalize"
             >
               <span className="cursor-pointer">Clear</span>

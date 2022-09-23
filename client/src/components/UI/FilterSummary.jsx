@@ -10,7 +10,7 @@ function FilterSummary() {
 
   return (
     !!checkQueryLength(query) && (
-      <div className="flex px-[5rem] gap-xs mt-sm">
+      <div className="flex gap-xs mt-sm">
         {Object.keys(query)
           .flatMap((filter) => {
             const value = query[filter];
