@@ -1,20 +1,20 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 function SearchBar() {
-  const searchInput = useRef();
   const [searchParams, setSearchParams] = useSearchParams();
+  const [searchValue, setSearchValue] = useState(searchParams.get("search"));
 
   const searchFilter = (searchText) => {
     searchParams.set("search", searchText);
     setSearchParams(searchParams.toString());
   };
+
   return (
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        searchFilter(searchInput.current.value);
-        searchInput.current.value = "";
+        searchFilter(searchValue);
       }}
       className="border border-darkGray flex items-center px-xs gap-sm"
     >
@@ -38,8 +38,8 @@ function SearchBar() {
         type="text"
         className="bg-transparent w-[20rem] h-[4rem] placeholder:text-darkGray focus:outline-none uppercase"
         placeholder="SEARCH RUNNER"
-        ref={searchInput}
-        value={searchParams.get("search")}
+        value={searchValue}
+        onChange={(event) => setSearchValue(event.target.value)}
       />
     </form>
   );

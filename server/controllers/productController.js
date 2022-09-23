@@ -9,10 +9,15 @@ exports.getAllProducts = catchErrors(async (req, res, next) => {
     .search()
     .filter()
     .sort()
-    .paginate(18)
-    .limitFields().query;
+    .limitFields()
+    .paginate(18).query;
 
-  const results = await Products.countDocuments();
+  const results = await new apiQuery(Products, req.query)
+    .search()
+    .filter()
+    .query.countDocuments();
+
+  if (!results) return next(new constructError(404, "No products found"));
 
   res.status(200).json({
     status: "success",

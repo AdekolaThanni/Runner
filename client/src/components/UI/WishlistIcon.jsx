@@ -1,10 +1,9 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function WishlistIcon() {
-  // const navigate = useNavigate();
   return (
-    <Link to="/products">
+    <Link to="/wishlist">
       <svg
         width="23"
         height="21"

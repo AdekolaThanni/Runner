@@ -69,12 +69,14 @@ const useQuery = () => {
   const addOption = (mainFilter, option) => {
     dispatch(queryActions.addToFilters([mainFilter, option]));
     addQueryOperation(mainFilter, option);
+    searchParams.delete("page");
     setSearchParams(searchParams.toString());
   };
 
   const removeOption = (mainFilter, option) => {
     dispatch(queryActions.removeFromFilters([mainFilter, option]));
     deleteQueryOperation(mainFilter, option);
+    searchParams.delete("page");
     setSearchParams(searchParams.toString());
   };
 
@@ -123,6 +125,8 @@ const useQuery = () => {
   const clearFilter = (mainFilter) => {
     dispatch(queryActions.clearFilter(mainFilter));
     deleteFilterOperation(mainFilter);
+    searchParams.delete("page");
+
     setSearchParams(searchParams.toString());
   };
 

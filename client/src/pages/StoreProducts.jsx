@@ -6,6 +6,7 @@ import FilterSummary from "../components/UI/FilterSummary";
 import { Await, useLoaderData, useNavigation } from "react-router-dom";
 import ProductsSkeleton from "../components/skeletons/ProductsSkeleton";
 import Products from "../components/layout/Products";
+import ProductsError from "../components/errors/ProductsError";
 
 function StoreProducts() {
   const data = useLoaderData();
@@ -79,15 +80,13 @@ function StoreProducts() {
       {/* Filter summary */}
       <FilterSummary />
       <React.Suspense fallback={<ProductsSkeleton />}>
-        <Await
-          resolve={data.products}
-          errorElement={<div className="text-lg">Error occured</div>}
-        >
-          {({ data: { products } }) => <Products products={products} />}
+        <Await resolve={data.products} errorElement={<ProductsError />}>
+          {({ data: { products, results, page } }) => (
+            <Products products={products} results={results} page={page} />
+          )}
         </Await>
       </React.Suspense>
-      {navigation.state === "loading" &&
-        navigation.location.pathname === "/" && <ProductsSkeleton />}
+      {navigation.state === "loading" && <ProductsSkeleton />}
     </Provider>
   );
 }
