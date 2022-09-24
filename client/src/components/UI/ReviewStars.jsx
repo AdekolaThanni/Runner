@@ -76,7 +76,6 @@ function ReviewStars({ ratingsCount, ratingsAverage, starClass }) {
           return emptyStar;
         })}
       </div>
-      <span>({ratingsCount})</span>
     </div>
   );
 }
