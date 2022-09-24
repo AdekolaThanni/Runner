@@ -17,3 +17,17 @@ export const getAllProducts = async ({ request }) => {
 
   return defer({ products: fetcher() });
 };
+
+export const getSingleProduct = async ({ params }) => {
+  const fetcher = async () => {
+    const response = await fetch(`${API_URL}/${params.productId}`);
+
+    const data = await response.json();
+
+    // console.log(data);
+
+    return data.data.product;
+  };
+
+  return defer({ product: fetcher() });
+};

@@ -16,7 +16,7 @@
   }
 
   h1 {
-    @apply text-lg uppercase mt-xl font-semibold;
+    @apply text-lg uppercase font-semibold;
   }
 }
 
@@ -32,5 +32,17 @@
   }
   .double-lines::after {
     @apply bottom-0 left-[50%] translate-x-[-50%];
+  }
+
+  .primary-button {
+    @apply bg-brown p-sm text-center text-white hover:opacity-70 duration-75 uppercase font-bold;
+  }
+
+  .secondary-button {
+    @apply border border-black p-sm text-center text-black hover:bg-black hover:text-white duration-200  uppercase font-bold;
+  }
+
+  .link {
+    @apply font-semibold underline hover:text-black text-darkGray;
   }
 }

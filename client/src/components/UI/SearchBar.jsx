@@ -1,11 +1,16 @@
 import React, { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate, useLocation } from "react-router-dom";
 
 function SearchBar() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchValue, setSearchValue] = useState(searchParams.get("search"));
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const searchFilter = (searchText) => {
+    if (location.pathname !== "/") {
+      navigate("/", {});
+    }
     searchParams.delete("page");
     if (!searchText) {
       searchParams.delete("search");

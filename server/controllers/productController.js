@@ -31,9 +31,7 @@ exports.getSingleProduct = catchErrors(async (req, res, next) => {
   const product = await new apiQuery(
     Products.findById(req.params.id),
     req.query
-  )
-    .limitFields()
-    .query.populate("reviews");
+  ).limitFields().query;
 
   if (!product) {
     return next(new constructError(404, "Product not found"));

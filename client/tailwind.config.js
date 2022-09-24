@@ -18,6 +18,7 @@ module.exports = {
         lightGray: "#eeeeee",
         darkGray: "#515151",
         grayFaint: "#51515157",
+        brown: "#8a7350",
       },
     },
     fontSize: {

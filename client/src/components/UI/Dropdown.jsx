@@ -103,7 +103,7 @@ function Dropdown({ placeholder, options, type }) {
           ref={modal}
           className={`first-letter🧮 py-[1.5rem] absolute ${
             placeholder === "Sort By" ? "right-0" : "left-0"
-          } top-[5rem] bg-white shadow-sm shadow-black flex flex-col min-w-[30rem] gap-[.5rem]`}
+          } top-[5rem] bg-white shadow-sm shadow-black flex flex-col min-w-[30rem] gap-[.5rem] z-50`}
         >
           {/* Close icon */}
           <svg

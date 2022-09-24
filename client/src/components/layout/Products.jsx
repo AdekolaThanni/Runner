@@ -32,7 +32,7 @@ function Products({ products, results, uniqueKey }) {
     (navigation.state === "idle" ||
       navigation.location.search.includes("page")) && (
       <motion.div
-        className=""
+        className="mt-xl"
         onViewportLeave={addProducts}
         viewport={{ margin: "-90% 0px 0px" }}
       >

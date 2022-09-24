@@ -10,8 +10,9 @@ function Image({ src, alt, className }) {
       setLoaded(true);
     });
   }, []);
+
   return (
-    <div className="w-full h-fit">
+    <>
       <img
         ref={imageRef}
         src={src}
@@ -20,12 +21,12 @@ function Image({ src, alt, className }) {
       />
       {!loaded && (
         <div
-          className={`flex items-center justify-center bg-lightGray ${className}`}
+          className={`flex items-center justify-center bg-lightGray w-full h-full`}
         >
           <Spinner />
         </div>
       )}
-    </div>
+    </>
   );
 }
 
