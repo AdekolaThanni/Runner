@@ -8,16 +8,17 @@ function SearchBar() {
   const location = useLocation();
 
   const searchFilter = (searchText) => {
-    if (location.pathname !== "/") {
-      navigate("/", {});
-    }
     searchParams.delete("page");
     if (!searchText) {
       searchParams.delete("search");
     } else {
       searchParams.set("search", searchText);
     }
-    setSearchParams(searchParams.toString());
+    if (location.pathname === "/") {
+      setSearchParams(searchParams.toString());
+    } else {
+      navigate(`/?${searchParams.toString()}`);
+    }
   };
 
   return (

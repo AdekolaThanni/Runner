@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useRef } from "react";
+import { Helmet } from "react-helmet";
 import { Await, useAsyncValue, useLoaderData } from "react-router-dom";
 import Reviews from "../components/layout/Reviews";
 import ProductsSkeletons from "../components/skeletons/ProductsSkeleton";
@@ -8,9 +9,13 @@ import ReviewStars from "../components/UI/ReviewStars";
 
 function ProductData() {
   const product = useAsyncValue();
-
+  const detailsRef = useRef();
   return (
     <>
+      <Helmet>
+        <title>{product.name}</title>
+        <meta name="description" content={product.details.description} />
+      </Helmet>
       {/* Top */}
       <div className="flex items-start gap-[5rem]">
         <ImageGallery images={product.images} />
@@ -32,13 +37,26 @@ function ProductData() {
             />
           </div>
           <div className="flex justify-between items-center">
-            <button className="link">View full details</button>
+            <button
+              className="link"
+              onClick={() => {
+                const { top, left } =
+                  detailsRef.current.getBoundingClientRect();
+                window.scrollTo({
+                  left,
+                  top,
+                  behavior: "smooth",
+                });
+              }}
+            >
+              View full details
+            </button>
             <button className="link">Write review</button>
           </div>
         </div>
       </div>
       {/* Bottom */}
-      <div className="mt-[12rem] w-[65rem]">
+      <div className="mt-[12rem] w-[65rem]" ref={detailsRef} id="details">
         <h2>Product Story</h2>
         <p className="text-darkGray border-b border-grayFaint pb-[3rem] mb-[3rem]">
           {product.details.description}

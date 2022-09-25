@@ -82,12 +82,10 @@ const useQuery = () => {
 
   const initialize = (filter) => {
     if (filter === "category" || filter === "brand") {
-      const options = searchParams.getAll(filter);
-      if (options.length) {
-        options.forEach((option) =>
-          dispatch(queryActions.addToFilters([filter, option]))
-        );
-      }
+      let options = searchParams.getAll(filter);
+      options.forEach((option) =>
+        dispatch(queryActions.addToFilters([filter, option]))
+      );
       return;
     }
     if (filter === "price") {

@@ -21,23 +21,26 @@ function ImageGallery({ images }) {
         ))}
       </div>
       {/* Display */}
-      {/* <GlassMagnifier
+      <GlassMagnifier
         imageSrc={activeSrc}
         imageAlt="Example"
-        className="w-[80rem] h-[65rem]"
-        largeImageSrc="https://us.louisvuitton.com/images/is/image/lv/1/P…BNMQ1PPC02_PM2_Front%20view.png?wid=2048&hei=2048"
-        allowOverflow={true}
+        className="w-[80rem] h-[65rem] overflow-hidden flex items-center justify-center z-10"
         magnifierSize="30%"
+        magnifierOffsetX={0}
+        magnifierOffsetY={0}
         magnifierBorderSize={5}
+        magnifierBorderColor="rgba(255, 255, 255, .5)"
         square={false}
-      /> */}
-      <div className="w-[80rem] h-[65rem]">
+        // onZoomStart={() => console.log("Start")}
+        // onZoomEnd={() => console.log("End")}
+      />
+      {/* <div className="w-[80rem] h-[65rem]">
         <Image
           src={activeSrc}
           alt=""
           className="w-full h-full object-cover object-center"
         />
-      </div>
+      </div> */}
     </div>
   );
 }

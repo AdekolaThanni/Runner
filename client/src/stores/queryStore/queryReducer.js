@@ -13,8 +13,10 @@ const querySlice = createSlice({
   initialState,
   reducers: {
     addToFilters: (state, { payload: [filter, option] }) => {
-      if (["category", "brand"].includes(filter)) state[filter].push(option);
-      else state[filter] = [option];
+      if (!state[filter].includes(option)) {
+        if (["category", "brand"].includes(filter)) state[filter].push(option);
+        else state[filter] = [option];
+      }
     },
     removeFromFilters: (state, { payload: [filter, option] }) => {
       state[filter] = state[filter].filter((opt) => opt !== option);
@@ -22,10 +24,9 @@ const querySlice = createSlice({
     clearFilter: (state, { payload: filter }) => {
       state[filter] = [];
     },
-    clearQuery: (state) => {
+    clearQuery: () => {
       return initialState;
     },
-    getURLQuery: (state) => {},
   },
 });
 

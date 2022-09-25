@@ -4,7 +4,6 @@ import Spinner from "../UI/Spinner";
 
 let initial = true;
 function Reviews({ productId }) {
-  const [visibility, setVisibility] = useState(false);
   const [loadingState, setLoadingState] = useState("idle");
   const [reviews, setReviews] = useState([]);
   const [sort, setSort] = useState(false);
@@ -84,7 +83,7 @@ function Reviews({ productId }) {
         </div>
       </div>
       {reviews.map((review) => (
-        <div className="mb-sm">
+        <div key={review._id} className="mb-sm">
           {/* Head */}
           <div className="flex items-center gap-[1.7rem]">
             <h3 className="mr-auto">{review.name}</h3>

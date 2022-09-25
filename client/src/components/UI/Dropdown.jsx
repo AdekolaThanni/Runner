@@ -72,7 +72,9 @@ function Dropdown({ placeholder, options, type }) {
       }
     });
 
-    initialize(mainTitle);
+    if (!activeOptions.length) {
+      initialize(mainTitle);
+    }
   }, []);
 
   return (

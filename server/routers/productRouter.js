@@ -1,5 +1,6 @@
 const express = require("express");
 const productController = require("../controllers/productController");
+const userController = require("../controllers/userController");
 
 const router = express.Router();
 
@@ -10,6 +11,6 @@ router.route("/:id").get(productController.getSingleProduct);
 router
   .route("/review/:id")
   .get(productController.getProductReviews)
-  .post(productController.createProductReview);
+  .post(userController.protect, productController.createProductReview);
 
 module.exports = router;

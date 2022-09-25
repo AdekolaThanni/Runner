@@ -14,14 +14,6 @@ function StoreProducts() {
 
   return (
     <Provider store={queryStore}>
-      <Helmet>
-        <title>Runner | Shop All Shoes</title>
-        <meta
-          name="description"
-          content="All shoes you need, Sneakers, Canvas, Leather Shoes and More..."
-        />
-      </Helmet>
-
       <h1>Shop All shoes</h1>
 
       {/* Filter box */}

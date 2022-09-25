@@ -64,10 +64,11 @@ exports.createProductReview = catchErrors(async (req, res, next) => {
   const { name, comment, rating } = req.body;
   const product = await Products.findById(req.params.id);
   const review = await Review.create({
-    name,
+    name: name || req.user.firstName,
     comment,
     rating,
     product: product._id,
+    user: req.user._id,
   });
   const [ratingsDetails] = await Review.aggregate([
     {
