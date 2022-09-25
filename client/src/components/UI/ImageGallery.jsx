@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { GlassMagnifier } from "react-image-magnifiers";
 import Image from "./Image";
 
 function ImageGallery({ images }) {
@@ -20,6 +21,16 @@ function ImageGallery({ images }) {
         ))}
       </div>
       {/* Display */}
+      {/* <GlassMagnifier
+        imageSrc={activeSrc}
+        imageAlt="Example"
+        className="w-[80rem] h-[65rem]"
+        largeImageSrc="https://us.louisvuitton.com/images/is/image/lv/1/P…BNMQ1PPC02_PM2_Front%20view.png?wid=2048&hei=2048"
+        allowOverflow={true}
+        magnifierSize="30%"
+        magnifierBorderSize={5}
+        square={false}
+      /> */}
       <div className="w-[80rem] h-[65rem]">
         <Image
           src={activeSrc}

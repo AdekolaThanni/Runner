@@ -18,6 +18,19 @@
   h1 {
     @apply text-lg uppercase font-semibold;
   }
+
+  h2 {
+    @apply text-md uppercase font-semibold mb-xs;
+  }
+
+  h3 {
+    @apply font-bold;
+  }
+
+  select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+  }
 }
 
 @layer components {

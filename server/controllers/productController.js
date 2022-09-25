@@ -49,9 +49,7 @@ exports.getProductReviews = catchErrors(async (req, res, next) => {
   const reviews = await new apiQuery(
     Review.find({ product: req.params.id }),
     req.query
-  )
-    .sort()
-    .paginate(10).query;
+  ).sort().query;
 
   res.status(200).json({
     status: "success",
@@ -86,7 +84,7 @@ exports.createProductReview = catchErrors(async (req, res, next) => {
     },
   ]);
 
-  product.updateRatings(review._id, ratingsDetails);
+  product.updateRatings(ratingsDetails);
   await product.save();
 
   res.status(200).json({

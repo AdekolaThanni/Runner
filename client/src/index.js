@@ -4,12 +4,13 @@ import "./index.css";
 import { RouterProvider } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 import router from "./router";
+import AppSkeleton from "./components/skeletons/AppSkeleton";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   // <React.StrictMode>
-  <RouterProvider router={router} />
+  <RouterProvider router={router} fallbackElement={<AppSkeleton />} />
   // </React.StrictMode>
 );
 

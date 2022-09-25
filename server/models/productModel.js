@@ -27,8 +27,7 @@ const Schema = new mongoose.Schema({
   images: [String],
 });
 
-Schema.method("updateRatings", function (id, rating) {
-  this.reviews.unshift(id);
+Schema.method("updateRatings", function (rating) {
   this.ratingsCount = rating.ratingsCount;
   this.ratingsAverage = rating.ratingsAverage.toFixed(1);
 });

@@ -1,5 +1,6 @@
 import React from "react";
 import { Await, useAsyncValue, useLoaderData } from "react-router-dom";
+import Reviews from "../components/layout/Reviews";
 import ProductsSkeletons from "../components/skeletons/ProductsSkeleton";
 import ImageGallery from "../components/UI/ImageGallery";
 import ProductAction from "../components/UI/ProductAction";
@@ -35,6 +36,20 @@ function ProductData() {
             <button className="link">Write review</button>
           </div>
         </div>
+      </div>
+      {/* Bottom */}
+      <div className="mt-[12rem] w-[65rem]">
+        <h2>Product Story</h2>
+        <p className="text-darkGray border-b border-grayFaint pb-[3rem] mb-[3rem]">
+          {product.details.description}
+        </p>
+        <h2>Features</h2>
+        <ul className="list-disc list-inside border-b border-grayFaint pb-[3rem] mb-[3rem]">
+          {product.details.features.map((feature) => (
+            <li>{feature}</li>
+          ))}
+        </ul>
+        <Reviews productId={product._id} />
       </div>
     </>
   );
