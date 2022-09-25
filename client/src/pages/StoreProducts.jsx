@@ -1,5 +1,4 @@
 import React from "react";
-import { Helmet } from "react-helmet";
 import Dropdown from "../components/UI/Dropdown";
 import { Provider } from "react-redux";
 import queryStore from "../stores/queryStore/queryStore";

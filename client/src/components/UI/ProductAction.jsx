@@ -1,10 +1,10 @@
 import React, { useRef } from "react";
+import useBag from "../../hooks/useBag";
+import Spinner from "./Spinner";
 
 function ProductAction({ productId }) {
-  //   const [dropdownVisible, setDropdownVisible] = useState(false);
   const quantityRef = useRef();
-
-  const addToBag = () => {};
+  const { fetchState, addToBag } = useBag();
 
   const addToWishlist = () => {};
 
@@ -46,10 +46,17 @@ function ProductAction({ productId }) {
         </svg>
       </div>
 
-      <button onclick={addToBag} className="primary-button">
-        Add To Bag
+      <button
+        onClick={() => addToBag(productId, quantityRef.current.value)}
+        className={`primary-button ${fetchState === "loading" && "opacity-70"}`}
+      >
+        {fetchState === "loading" ? (
+          <Spinner className="w-[2.5rem] h-[2.5rem] mx-auto" />
+        ) : (
+          "Add To Bag"
+        )}
       </button>
-      <button onclick={addToWishlist} className="secondary-button">
+      <button onClick={addToWishlist} className="secondary-button">
         Add To Wishlist
       </button>
     </div>
