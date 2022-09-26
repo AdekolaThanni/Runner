@@ -1,11 +1,14 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 import Divider from "../components/UI/Divider";
 import Image from "../components/UI/Image";
+import Spinner from "../components/UI/Spinner";
 import useBag from "../hooks/useBag";
 
 function ProductInBag({ product, quantity }) {
   const [quantityVal, setQuantityVal] = useState(quantity);
+  const { updateBag } = useBag();
 
   return (
     <div className="flex gap-md my-lg">
@@ -31,9 +34,11 @@ function ProductInBag({ product, quantity }) {
               <select
                 name="quantity"
                 id="quantity"
-                className="p-xs pr-[4rem] self-start border border-black"
+                className="p-xs pr-[4rem] self-start border border-black cursor-pointer"
                 onChange={(event) => {
+                  if (quantityVal === event.target.value) return;
                   setQuantityVal(event.target.value);
+                  updateBag(product._id, event.target.value);
                 }}
                 value={quantityVal}
               >
@@ -81,7 +86,6 @@ function ProductInBag({ product, quantity }) {
 
 function Bag() {
   const { fetchState, bag, getBag } = useBag();
-
   const [totalPrice, setTotalPrice] = useState(10);
 
   useEffect(() => {
@@ -95,18 +99,26 @@ function Bag() {
   }, []);
 
   return (
-    <div>
+    <div className="">
+      <Helmet>
+        <title>{`Shopping Bag ({${bag.length})`}</title>
+      </Helmet>
       <h1 className="">Shopping Bag ({bag.length})</h1>
       <Divider className="mt-lg" />
-      <div className="flex">
+      <div className="flex min-h-[90vh]">
         <div className="w-[85rem]">
-          {!!bag.length &&
+          {fetchState === "loading" ? (
+            <Spinner className="w-[7rem] h-[7rem] mx-auto mt-xl" />
+          ) : fetchState === "fail" ? (
+            <h2 className="mt-xl">An error occured</h2>
+          ) : (
             bag.map(({ product, quantity }, index) => (
               <>
                 <ProductInBag product={product} quantity={quantity} />
                 {index !== bag.length - 1 && <Divider />}
               </>
-            ))}
+            ))
+          )}
         </div>
         <div className="border-l border-l-grayFaint ml-xl pl-lg pt-[3rem] z-50 bg-white flex-grow">
           <h2>Summary</h2>

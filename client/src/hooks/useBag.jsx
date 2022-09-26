@@ -14,7 +14,7 @@ const useBag = () => {
       setFetchState("loading");
       const response = await fetch("/api/cart");
 
-      if (!response.ok) throw new Error();
+      if (!response.ok) throw new Error("Could not get your bag");
 
       const data = await response.json();
       if (data.message) return;
@@ -50,10 +50,10 @@ const useBag = () => {
 
       const formerLength = amount;
       const data = await response.json();
-      dispatch(bagActions.updateBag(data.data.cart.products));
       if (data.data.cart.products.length === formerLength) {
         throw new Error("Product is in bag already");
       }
+      dispatch(bagActions.updateBag(data.data.cart.products));
 
       setFetchState("success");
     } catch (error) {
@@ -67,12 +67,43 @@ const useBag = () => {
     }
   };
 
+  const updateBag = async (productId, quantity) => {
+    try {
+      setFetchState("loading");
+      const response = await fetch(`/api/cart/${productId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          quantity,
+        }),
+      });
+
+      if (!response.ok) throw new Error("Product could not be updated");
+
+      const data = await response.json();
+
+      if (data.message) throw new Error(data.message);
+      setFetchState("success");
+      dispatch(
+        popupActions.showPopup({
+          type: "success",
+          message: "Bag has been updated successfully",
+        })
+      );
+      await getBag();
+    } catch (error) {
+      setFetchState("fail");
+      dispatch(popupActions.showPopup({ type: error, message: error.message }));
+    }
+  };
+
   return {
     getBag,
     amount,
     addToBag,
     fetchState,
     bag,
+    updateBag,
   };
 };
 
