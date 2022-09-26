@@ -4,7 +4,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import React, { useEffect } from "react";
 import { Provider } from "react-redux";
 import appStore from "./stores/appStore/appStore";
-import GlobalErrorPopup from "./components/errors/GlobalErrorPopup";
+import GlobalPopup from "./components/errors/GlobalPopup";
 
 function App() {
   const location = useLocation();
@@ -16,7 +16,7 @@ function App() {
   return (
     <Provider store={appStore}>
       <Header />
-      <GlobalErrorPopup />
+      <GlobalPopup />
       <main className="min-h-[95vh] relative px-[5rem]">
         <Outlet />
       </main>

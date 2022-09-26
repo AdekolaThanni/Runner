@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bagActions } from "../stores/appStore/bagReducer";
-import { errorActions } from "../stores/appStore/errorReducer";
+import { popupActions } from "../stores/appStore/popupReducer";
 
 const useBag = () => {
   const [fetchState, setFetchState] = useState();
@@ -22,7 +22,12 @@ const useBag = () => {
       setFetchState("success");
     } catch (error) {
       setFetchState("fail");
-      dispatch(errorActions.showError(error.message));
+      dispatch(
+        popupActions.showPopup({
+          type: "error",
+          message: error.message,
+        })
+      );
     }
   };
 
@@ -40,21 +45,25 @@ const useBag = () => {
         }),
       });
 
-      if (!response.ok) throw new Error("Something went wrong...");
+      if (!response.ok)
+        throw new Error("Please check your internet connection...");
 
       const formerLength = amount;
       const data = await response.json();
       dispatch(bagActions.updateBag(data.data.cart.products));
       if (data.data.cart.products.length === formerLength) {
-        throw new Error(
-          "Product is in bag already, Go to bag to update product details if need be"
-        );
+        throw new Error("Product is in bag already");
       }
 
       setFetchState("success");
     } catch (error) {
       setFetchState("fail");
-      dispatch(errorActions.showError(error.message));
+      dispatch(
+        popupActions.showPopup({
+          type: "error",
+          message: error.message,
+        })
+      );
     }
   };
 

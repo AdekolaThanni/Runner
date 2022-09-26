@@ -4,6 +4,7 @@ import StoreProducts from "./pages/StoreProducts";
 import ErrorPage from "./pages/ErrorPage";
 import { getAllProducts, getSingleProduct } from "./api/products";
 import Product from "./pages/Product";
+import Bag from "./pages/Bag";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
         path: "products/:productId",
         loader: getSingleProduct,
         element: <Product />,
+      },
+      {
+        path: "bag",
+        element: <Bag />,
       },
     ],
   },

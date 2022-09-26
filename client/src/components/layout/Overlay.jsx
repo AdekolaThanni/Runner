@@ -1,11 +1,51 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
+import { motion } from "framer-motion";
 
-function Overlay({ children }) {
+function Overlay({ children, hideOverlay }) {
+  const overlayRef = useRef();
+
+  useEffect(() => {
+    overlayRef.current.addEventListener("click", (event) => {
+      if (event.target.id === "overlayVisual") {
+        hideOverlay();
+      }
+    });
+  }, []);
+
+  const variations = {
+    hidden: {
+      opacity: 0,
+      transition: {
+        duration: 0.2,
+      },
+    },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.2,
+      },
+    },
+    exit: {
+      opacity: 0,
+      transition: {
+        duration: 0.2,
+      },
+    },
+  };
+
   return createPortal(
-    <div className="absolute w-screen h-screen flex items-center justify-center bg-[#000000] z-[10000]">
+    <motion.div
+      ref={overlayRef}
+      variants={variations}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      id="overlayVisual"
+      className="fixed w-screen h-screen flex items-center justify-center bg-[rgba(0,0,0,.3)] z-[10000]"
+    >
       {children}
-    </div>,
+    </motion.div>,
     document.getElementById("overlay")
   );
 }
