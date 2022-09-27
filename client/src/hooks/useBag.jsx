@@ -17,8 +17,11 @@ const useBag = () => {
       if (!response.ok) throw new Error("Could not get your bag");
 
       const data = await response.json();
-      if (data.message) return;
-      dispatch(bagActions.updateBag(data.data.cart.products));
+      if (!data.message) {
+        dispatch(bagActions.updateBag(data.data.cart.products));
+      } else {
+        dispatch(bagActions.updateBag([]));
+      }
       setFetchState("success");
     } catch (error) {
       setFetchState("fail");
@@ -54,7 +57,12 @@ const useBag = () => {
         throw new Error("Product is in bag already");
       }
       dispatch(bagActions.updateBag(data.data.cart.products));
-
+      dispatch(
+        popupActions.showPopup({
+          type: "success",
+          message: "Product added to bag successfully",
+        })
+      );
       setFetchState("success");
     } catch (error) {
       setFetchState("fail");
@@ -97,6 +105,28 @@ const useBag = () => {
     }
   };
 
+  const deleteFromBag = async (productId) => {
+    try {
+      setFetchState("loading");
+      const response = await fetch(`/api/cart/${productId}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) throw new Error("Product could not be deleted");
+      setFetchState("success");
+      dispatch(
+        popupActions.showPopup({
+          type: "success",
+          message: "Product removed from bag successfully",
+        })
+      );
+      await getBag();
+    } catch (error) {
+      setFetchState("fail");
+      dispatch(popupActions.showPopup({ type: error, message: error.message }));
+    }
+  };
+
   return {
     getBag,
     amount,
@@ -104,6 +134,7 @@ const useBag = () => {
     fetchState,
     bag,
     updateBag,
+    deleteFromBag,
   };
 };
 

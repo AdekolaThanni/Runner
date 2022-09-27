@@ -5,6 +5,7 @@ import React, { useEffect } from "react";
 import { Provider } from "react-redux";
 import appStore from "./stores/appStore/appStore";
 import GlobalPopup from "./components/errors/GlobalPopup";
+import Confirmation from "./components/layout/Confirmation";
 
 function App() {
   const location = useLocation();
@@ -17,6 +18,7 @@ function App() {
     <Provider store={appStore}>
       <Header />
       <GlobalPopup />
+      <Confirmation />
       <main className="min-h-[95vh] relative px-[5rem]">
         <Outlet />
       </main>
