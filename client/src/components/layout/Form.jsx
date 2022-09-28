@@ -4,6 +4,7 @@ import Overlay from "./Overlay";
 import { AnimatePresence, motion } from "framer-motion";
 import { formActions } from "../../stores/appStore/formReducer";
 import RegistrationForm from "./RegistrationForm";
+import LoginForm from "./LoginForm";
 
 function Form() {
   const dispatch = useDispatch();
@@ -40,11 +41,12 @@ function Form() {
         <Overlay hideOverlay={hideForm}>
           <motion.div
             variants={variation}
-            className="bg-white rounded-lg w-[60rem] min-h-[86vh] p-xl pb-lg text-darkGray"
+            className="bg-white rounded-lg w-[60rem] min-h-[86vh] p-xl pb-lg text-darkGray flex flex-col"
           >
             {formType === "registration" && (
               <RegistrationForm hideForm={hideForm} />
             )}
+            {formType === "login" && <LoginForm hideForm={hideForm} />}
           </motion.div>
         </Overlay>
       )}

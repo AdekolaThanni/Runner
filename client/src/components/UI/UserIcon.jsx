@@ -43,7 +43,15 @@ function UserModal({ closeModal }) {
           </Link>
         </div>
         <div className="flex flex-col gap-sm p-lg">
-          <button className="primary-button w-full">Login</button>
+          <button
+            onClick={() => {
+              closeModal();
+              dispatch(formActions.showForm({ type: "login" }));
+            }}
+            className="primary-button w-full"
+          >
+            Login
+          </button>
           <button
             onClick={() => {
               closeModal();
