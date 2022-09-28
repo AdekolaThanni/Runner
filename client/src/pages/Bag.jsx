@@ -113,7 +113,7 @@ function Bag() {
   return (
     <div className="">
       <Helmet>
-        <title>{`Shopping Bag ({${bag.length})`}</title>
+        <title>{`Shopping Bag (${bag.length})`}</title>
       </Helmet>
       {fetchState === "success" && !bag.length ? (
         <h1 className="mt-xl text-center">Your bag is empty!</h1>

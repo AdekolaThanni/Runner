@@ -40,7 +40,7 @@ function GlobalPopup() {
           <motion.div
             onClick={hidePopup}
             variants={variation}
-            className="absolute top-[8.2rem] right-0 flex items-center bg-white rounded-l-lg overflow-hidden"
+            className="absolute top-[8.2rem] right-0 flex bg-white rounded-l-lg overflow-hidden"
           >
             <div
               className={`${
@@ -63,7 +63,7 @@ function GlobalPopup() {
                 <path fill="none" d="M0 0h36v36H0z" />
               </svg>
             </div>
-            <p className="px-md py-xs text-[1.7rem] pr-[10rem] font-medium">
+            <p className="px-md py-xs text-[1.7rem] pr-[5rem] font-medium max-w-[35rem] flex items-center">
               {popup.message}
             </p>
           </motion.div>
