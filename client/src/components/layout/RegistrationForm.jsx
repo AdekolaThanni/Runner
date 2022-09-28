@@ -7,6 +7,7 @@ import { formActions } from "../../stores/appStore/formReducer";
 import FormError from "../UI/FormError";
 import { useState } from "react";
 import Spinner from "../UI/Spinner";
+import { authActions } from "../../stores/appStore/authReducer";
 
 const RegistrationSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -21,10 +22,9 @@ const RegistrationSchema = Yup.object().shape({
   password: Yup.string()
     .min(8, "Your password must be at least 8 characters long")
     .required("Required"),
-  confirmPassword: Yup.string().oneOf(
-    [Yup.ref("password"), null],
-    "Passwords must match"
-  ),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref("password"), null], "Passwords must match")
+    .required("Required"),
 });
 
 function RegistrationForm({ hideForm }) {
@@ -66,6 +66,7 @@ function RegistrationForm({ hideForm }) {
 
     setCreatingAccount(false);
     hideForm();
+    dispatch(authActions.setLoggedInState({ loggedIn: true }));
     setTimeout(() => {
       dispatch(
         popupActions.showPopup({

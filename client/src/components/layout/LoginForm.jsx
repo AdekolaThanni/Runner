@@ -7,6 +7,7 @@ import { formActions } from "../../stores/appStore/formReducer";
 import FormError from "../UI/FormError";
 import { useState } from "react";
 import Spinner from "../UI/Spinner";
+import { authActions } from "../../stores/appStore/authReducer";
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("required"),
@@ -42,6 +43,8 @@ function LoginForm({ hideForm }) {
     }
 
     setLoggingUserIn(false);
+    dispatch(authActions.setLoggedInState({ loggedIn: true }));
+
     hideForm();
     setTimeout(() => {
       dispatch(

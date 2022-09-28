@@ -5,7 +5,10 @@ const wishlistController = require("../controllers/wishlistController");
 const router = express.Router();
 
 router.route("/register").post(userController.register);
-router.route("/login").post(userController.login);
+router
+  .route("/login")
+  .get(userController.checkIfLoggedIn)
+  .post(userController.login);
 router.route("/forgotPassword").post(userController.forgotPassword);
 router.route("/resetPassword/:token").post(userController.resetPassword);
 

@@ -2,7 +2,7 @@ import React from "react";
 
 function FormError({ errorMessage }) {
   return (
-    <div className="flex items-center gap-[3px] text-red-800 absolute text-[1.2rem] bottom-[-23px] right-0">
+    <div className="flex capitalize items-center gap-[3px] text-red-800 absolute text-[1.2rem] bottom-[-23px] right-0">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="1em"

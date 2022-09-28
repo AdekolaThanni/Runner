@@ -1,13 +1,17 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import Overlay from "../layout/Overlay";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { formActions } from "../../stores/appStore/formReducer";
+import { authActions } from "../../stores/appStore/authReducer";
+import { popupActions } from "../../stores/appStore/popupReducer";
+import Spinner from "./Spinner";
 
 function UserModal({ closeModal }) {
   const dispatch = useDispatch();
+  const [loggingOut, setLoggingOut] = useState(false);
+  const loggedIn = useSelector((state) => state.authReducer.loggedIn);
   const variation = {
     hidden: {
       translateX: "30rem",
@@ -28,11 +32,37 @@ function UserModal({ closeModal }) {
       },
     },
   };
+
+  const logout = async () => {
+    try {
+      setLoggingOut(true);
+      const response = await fetch("/api/users/logout");
+      if (!response.ok) throw new Error();
+      else {
+        setLoggingOut(false);
+        dispatch(authActions.setLoggedInState({ loggedIn: false }));
+        dispatch(
+          popupActions.showPopup({
+            type: "success",
+            message: "Logged out successfully",
+          })
+        );
+      }
+    } catch (error) {
+      dispatch(
+        popupActions.showPopup({
+          type: "error",
+          message: "Could not log you out, Please try again",
+        })
+      );
+    }
+  };
+
   return (
     <Overlay hideOverlay={closeModal}>
       <motion.div
         variants={variation}
-        className="absolute top-[8.2rem] right-0 w-[40rem] bg-white"
+        className="absolute top-[8.2rem] right-0 w-[45rem] bg-white"
       >
         <div className="flex flex-col gap-sm border-b border-b-grayFaint p-lg">
           <Link to="/account" className="link">
@@ -43,24 +73,36 @@ function UserModal({ closeModal }) {
           </Link>
         </div>
         <div className="flex flex-col gap-sm p-lg">
-          <button
-            onClick={() => {
-              closeModal();
-              dispatch(formActions.showForm({ type: "login" }));
-            }}
-            className="primary-button w-full"
-          >
-            Login
-          </button>
-          <button
-            onClick={() => {
-              closeModal();
-              dispatch(formActions.showForm({ type: "registration" }));
-            }}
-            className="secondary-button w-full"
-          >
-            Register
-          </button>
+          {!loggedIn ? (
+            <>
+              <button
+                onClick={() => {
+                  closeModal();
+                  dispatch(formActions.showForm({ type: "login" }));
+                }}
+                className="primary-button w-full"
+              >
+                Login
+              </button>
+              <button
+                onClick={() => {
+                  closeModal();
+                  dispatch(formActions.showForm({ type: "registration" }));
+                }}
+                className="secondary-button w-full"
+              >
+                Register
+              </button>
+            </>
+          ) : (
+            <button onClick={logout} className="primary-button">
+              {!loggingOut ? (
+                "Logout"
+              ) : (
+                <Spinner className="w-[2.5rem] h-[2.5rem]" />
+              )}
+            </button>
+          )}
         </div>
       </motion.div>
     </Overlay>
