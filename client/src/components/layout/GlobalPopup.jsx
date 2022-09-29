@@ -63,7 +63,7 @@ function GlobalPopup() {
                 <path fill="none" d="M0 0h36v36H0z" />
               </svg>
             </div>
-            <p className="px-md py-xs text-[1.7rem] pr-[5rem] font-medium max-w-[35rem] flex items-center">
+            <p className="px-md py-xs text-[1.7rem] pr-[5rem] font-medium w-[35rem] flex items-center">
               {popup.message}
             </p>
           </motion.div>

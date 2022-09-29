@@ -1,7 +1,5 @@
 import React from "react";
 import Dropdown from "../components/UI/Dropdown";
-import { Provider } from "react-redux";
-import queryStore from "../stores/queryStore/queryStore";
 import FilterSummary from "../components/UI/FilterSummary";
 import { Await, useLoaderData, useNavigation } from "react-router-dom";
 import ProductsSkeleton from "../components/skeletons/ProductsSkeleton";
@@ -13,7 +11,7 @@ function StoreProducts() {
   const navigation = useNavigation();
 
   return (
-    <Provider store={queryStore}>
+    <>
       <h1>Shop All shoes</h1>
 
       {/* Filter box */}
@@ -110,7 +108,7 @@ function StoreProducts() {
         </Await>
       </React.Suspense>
       {navigation.state === "loading" && <ProductsSkeleton />}
-    </Provider>
+    </>
   );
 }
 

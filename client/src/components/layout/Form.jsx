@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { formActions } from "../../stores/appStore/formReducer";
 import RegistrationForm from "./RegistrationForm";
 import LoginForm from "./LoginForm";
+import ReviewForm from "./ReviewForm";
 
 function Form() {
   const dispatch = useDispatch();
@@ -47,6 +48,7 @@ function Form() {
               <RegistrationForm hideForm={hideForm} />
             )}
             {formType === "login" && <LoginForm hideForm={hideForm} />}
+            {formType === "login" && <ReviewForm hideForm={hideForm} />}
           </motion.div>
         </Overlay>
       )}

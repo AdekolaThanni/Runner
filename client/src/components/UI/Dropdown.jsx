@@ -62,7 +62,7 @@ function Dropdown({ placeholder, options, type }) {
   const mainTitle = placeholder.split(" ")[0].toLowerCase();
   const modal = useRef();
   const { addOption, removeOption, clearFilter, initialize } = useQuery();
-  const activeOptions = useSelector((state) => state[mainTitle]);
+  const activeOptions = useSelector((state) => state.queryReducer[mainTitle]);
 
   useEffect(() => {
     // Hide modal on clicking outside

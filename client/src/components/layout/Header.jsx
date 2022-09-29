@@ -17,7 +17,6 @@ function Header() {
       if (!response.ok) throw new Error();
 
       const data = await response.json();
-      console.log(data);
       dispatch(authActions.setLoggedInState({ loggedIn: data.data }));
     } catch (error) {
       dispatch(authActions.setLoggedInState({ loggedIn: false }));

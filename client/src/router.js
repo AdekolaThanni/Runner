@@ -5,6 +5,7 @@ import ErrorPage from "./pages/ErrorPage";
 import { getAllProducts, getSingleProduct } from "./api/products";
 import Product from "./pages/Product";
 import Bag from "./pages/Bag";
+import Wishlist from "./pages/Wishlist";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "bag",
         element: <Bag />,
+      },
+      {
+        path: "wishlist",
+        element: <Wishlist />,
       },
     ],
   },

@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { queryActions } from "../stores/queryStore//queryReducer";
+import { queryActions } from "../stores/appStore/queryReducer";
 import { useSearchParams } from "react-router-dom";
 const useQuery = () => {
   const [searchParams, setSearchParams] = useSearchParams();

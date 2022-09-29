@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import useWishlist from "../../hooks/useWishlist";
+import { wishlistActions } from "../../stores/appStore/wishlistReducer";
 
 function WishlistIcon() {
+  const dispatch = useDispatch();
+  const { wishlist, getWishlist } = useWishlist();
+  const loggedIn = useSelector((state) => state.authReducer.loggedIn);
+
+  useEffect(() => {
+    if (loggedIn) {
+      getWishlist();
+    } else {
+      dispatch(wishlistActions.updateWishlist([]));
+    }
+  }, [loggedIn]);
+
   return (
-    <Link to="/wishlist">
+    <Link to="/wishlist" className="relative w-fit h-fit">
       <svg
         width="23"
         height="21"
@@ -17,6 +32,11 @@ function WishlistIcon() {
           stroke="white"
         />
       </svg>
+      {!!wishlist.length && (
+        <div className="absolute bottom-[-5px] right-[-7px] bg-red-600 rounded-full flex items-center justify-center min-w-[1.5rem] min-h-[1.5rem] text-[1rem] ">
+          {wishlist.length}
+        </div>
+      )}
     </Link>
   );
 }

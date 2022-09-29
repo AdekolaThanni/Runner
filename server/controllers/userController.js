@@ -224,7 +224,7 @@ exports.resetPassword = catchErrors(async (req, res, next) => {
 });
 
 exports.checkIfLoggedIn = (req, res) => {
-  if (req.cookies.runnerAuthToken && JSON.parse(req.cookies.runnerAuthToken)) {
+  if (req.cookies.runnerAuthToken) {
     res.status(200).json({ status: "success", data: true });
   } else {
     res.status(200).json({ status: "success", data: false });

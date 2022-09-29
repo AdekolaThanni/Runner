@@ -4,6 +4,8 @@ import popupReducer from "./popupReducer";
 import confirmationReducer from "./confirmationReducer";
 import formReducer from "./formReducer";
 import authReducer from "./authReducer";
+import wishlistReducer from "./wishlistReducer";
+import queryReducer from "./queryReducer";
 
 const appStore = configureStore({
   reducer: {
@@ -12,6 +14,8 @@ const appStore = configureStore({
     confirmationReducer,
     formReducer,
     authReducer,
+    wishlistReducer,
+    queryReducer,
   },
 });
 

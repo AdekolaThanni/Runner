@@ -146,7 +146,7 @@ function Bag() {
               <h2>Summary</h2>
               <div className="flex items-center justify-between text-[1.8rem] mt-md text-darkGray">
                 Subtotal
-                <span className="font-bold">${totalPrice}</span>
+                <span className="font-bold">${totalPrice.toFixed(2)}</span>
               </div>
               <div className="flex items-center justify-between text-[1.8rem] mt-sm text-darkGray">
                 Estimated Delivery and Handling

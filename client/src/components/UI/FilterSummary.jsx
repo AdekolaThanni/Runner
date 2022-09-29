@@ -4,7 +4,7 @@ import useQuery from "../../hooks/useQuery";
 
 function FilterSummary() {
   const { clearQuery, removeOption } = useQuery();
-  const query = useSelector((state) => state);
+  const query = useSelector((state) => state.queryReducer);
   const checkQueryLength = (query) =>
     Object.keys(query).flatMap((filter) => query[filter]).length;
 
