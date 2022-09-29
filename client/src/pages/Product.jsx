@@ -1,15 +1,18 @@
 import React, { useRef } from "react";
 import { Helmet } from "react-helmet";
+import { useDispatch } from "react-redux";
 import { Await, useAsyncValue, useLoaderData } from "react-router-dom";
 import Reviews from "../components/layout/Reviews";
 import ProductsSkeletons from "../components/skeletons/ProductsSkeleton";
 import ImageGallery from "../components/UI/ImageGallery";
 import ProductAction from "../components/UI/ProductAction";
 import ReviewStars from "../components/UI/ReviewStars";
+import { formActions } from "../stores/appStore/formReducer";
 
 function ProductData() {
   const product = useAsyncValue();
   const detailsRef = useRef();
+  const dispatch = useDispatch();
   return (
     <>
       <Helmet>
@@ -51,7 +54,16 @@ function ProductData() {
             >
               View full details
             </button>
-            <button className="link">Write review</button>
+            <button
+              onClick={() =>
+                dispatch(
+                  formActions.showForm({ type: "review", payload: product._id })
+                )
+              }
+              className="link"
+            >
+              Write review
+            </button>
           </div>
         </div>
       </div>

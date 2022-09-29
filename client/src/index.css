@@ -38,6 +38,12 @@
   input:-webkit-autofill:active {
     transition: background-color 5000s ease-in-out 0s;
   }
+
+  input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
 }
 
 @layer components {
@@ -51,5 +57,9 @@
 
   .link {
     @apply font-semibold underline hover:text-black text-darkGray;
+  }
+
+  .red-svg path {
+    @apply fill-[#c90000d8];
   }
 }

@@ -9,7 +9,7 @@ import ReviewForm from "./ReviewForm";
 
 function Form() {
   const dispatch = useDispatch();
-  const formType = useSelector((state) => state.formReducer.type);
+  const form = useSelector((state) => state.formReducer);
 
   const hideForm = () => {
     dispatch(formActions.hideForm());
@@ -38,17 +38,19 @@ function Form() {
 
   return (
     <AnimatePresence>
-      {formType && (
+      {form.type && (
         <Overlay hideOverlay={hideForm}>
           <motion.div
             variants={variation}
             className="bg-white rounded-lg w-[60rem] min-h-[86vh] p-xl pb-lg text-darkGray flex flex-col"
           >
-            {formType === "registration" && (
+            {form.type === "registration" && (
               <RegistrationForm hideForm={hideForm} />
             )}
-            {formType === "login" && <LoginForm hideForm={hideForm} />}
-            {formType === "login" && <ReviewForm hideForm={hideForm} />}
+            {form.type === "login" && <LoginForm hideForm={hideForm} />}
+            {form.type === "review" && (
+              <ReviewForm hideForm={hideForm} productId={form.payload} />
+            )}
           </motion.div>
         </Overlay>
       )}
