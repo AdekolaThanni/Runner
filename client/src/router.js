@@ -8,6 +8,7 @@ import Bag from "./pages/Bag";
 import Wishlist from "./pages/Wishlist";
 import Account from "./pages/Account";
 import { getUser } from "./api/user";
+import Form from "./components/layout/Form";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
         path: "account",
         loader: getUser,
         element: <Account />,
+      },
+      {
+        path: "resetPassword/:token",
+        element: <Form />,
       },
     ],
   },

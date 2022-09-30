@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { popupActions } from "../../stores/appStore/popupReducer";
 import { formActions } from "../../stores/appStore/formReducer";
 import FormError from "../UI/FormError";
-import { useState } from "react";
 import Spinner from "../UI/Spinner";
 import { authActions } from "../../stores/appStore/authReducer";
 
@@ -145,7 +144,14 @@ function LoginForm({ hideForm }) {
                   Register here
                 </button>
               </span>
-              <button className="link">Forgot Password</button>
+              <button
+                onClick={() =>
+                  dispatch(formActions.showForm({ type: "forgotPassword" }))
+                }
+                className="link"
+              >
+                Forgot Password
+              </button>
             </div>
           </>
         )}

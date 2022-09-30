@@ -164,7 +164,7 @@ exports.forgotPassword = catchErrors(async (req, res, next) => {
   if (!email) return next(new constructError(400, "Please provide your email"));
 
   const user = await User.findOne({ email });
-  if (!user) return next(new constructError(404, "User does not exist"));
+  if (!user) return next(new constructError(404, "Email does not exist"));
 
   const token = user.createPasswordResetToken();
 
@@ -207,7 +207,7 @@ exports.resetPassword = catchErrors(async (req, res, next) => {
   const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
 
   const user = await User.findOne({
-    passswordResetToken: hashedToken,
+    passwordResetToken: hashedToken,
     passwordResetTokenExpires: { $gte: Date.now() },
   });
 
@@ -216,7 +216,7 @@ exports.resetPassword = catchErrors(async (req, res, next) => {
 
   user.password = password;
   user.confirmPassword = confirmPassword;
-  user.passswordResetToken = undefined;
+  user.passwordResetToken = undefined;
   user.passwordResetTokenExpires = undefined;
   await user.save();
 

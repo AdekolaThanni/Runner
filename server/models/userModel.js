@@ -39,6 +39,8 @@ const Schema = new mongoose.Schema({
   cart: {
     type: mongoose.Schema.Types.ObjectId,
   },
+  passwordResetToken: String,
+  passwordResetTokenExpires: Date,
 });
 
 // Hash password before saving
