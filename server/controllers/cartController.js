@@ -126,3 +126,16 @@ exports.updateProductInCart = catchErrors(async (req, res, next) => {
     },
   });
 });
+
+exports.deleteCart = catchErrors(async (req, res) => {
+  const cartId = checkCartInCookies(req);
+  if (cartId) {
+    await Cart.deleteOne({ _id: cartId });
+    res.cookie("runnerCart", JSON.stringify(""));
+  }
+
+  res.status(204).json({
+    status: "success",
+    data: null,
+  });
+});

@@ -7,6 +7,7 @@ import Image from "../components/UI/Image";
 import Spinner from "../components/UI/Spinner";
 import useBag from "../hooks/useBag";
 import { confirmationActions } from "../stores/appStore/confirmationReducer";
+import { formActions } from "../stores/appStore/formReducer";
 
 function ProductInBag({ product, quantity, updateBag, deleteFromBag }) {
   const [quantityVal, setQuantityVal] = useState(quantity);
@@ -98,7 +99,8 @@ function ProductInBag({ product, quantity, updateBag, deleteFromBag }) {
 
 function Bag() {
   const { fetchState, bag, getBag, updateBag, deleteFromBag } = useBag();
-  const [totalPrice, setTotalPrice] = useState(10);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setTotalPrice(
@@ -116,7 +118,9 @@ function Bag() {
         <title>{`Shopping Bag (${bag.length})`}</title>
       </Helmet>
       {fetchState === "success" && !bag.length ? (
-        <h1 className="mt-xl text-center">Your bag is empty!</h1>
+        <h1 className="text-brown text-[5rem] text-center mt-[10rem]">
+          Your bag is empty!
+        </h1>
       ) : (
         <>
           <h1 className="">Shopping Bag ({bag.length})</h1>
@@ -131,13 +135,13 @@ function Bag() {
                 bag.map(({ product, quantity }, index) => (
                   <>
                     <ProductInBag
-                      key={index}
+                      key={product._id}
                       product={product}
                       quantity={quantity}
                       updateBag={updateBag}
                       deleteFromBag={deleteFromBag}
                     />
-                    {index !== bag.length - 1 && <Divider />}
+                    {index !== bag.length - 1 && <Divider key={product._id} />}
                   </>
                 ))
               )}
@@ -150,15 +154,20 @@ function Bag() {
               </div>
               <div className="flex items-center justify-between text-[1.8rem] mt-sm text-darkGray">
                 Estimated Delivery and Handling
-                <span className="font-bold">$10.00</span>
+                <span className="font-bold">$00.00</span>
               </div>
               <div className="flex items-center justify-between text-[1.8rem] my-lg border-y border-y-grayFaint py-md">
                 Total
                 <span className="font-bold">
-                  ${(totalPrice + 10).toFixed(2)}
+                  ${(totalPrice + 0).toFixed(2)}
                 </span>
               </div>
-              <button className="primary-button w-full">
+              <button
+                onClick={() =>
+                  dispatch(formActions.showForm({ type: "address" }))
+                }
+                className="primary-button w-full"
+              >
                 Proceed To Checkout
               </button>
             </div>

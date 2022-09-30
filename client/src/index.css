@@ -43,6 +43,11 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+    z-index: 1000;
+  }
+
+  label {
+    z-index: 1;
   }
 }
 

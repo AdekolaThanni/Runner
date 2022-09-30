@@ -123,7 +123,34 @@ const useBag = () => {
       await getBag();
     } catch (error) {
       setFetchState("fail");
-      dispatch(popupActions.showPopup({ type: error, message: error.message }));
+      dispatch(
+        popupActions.showPopup({ type: "error", message: error.message })
+      );
+    }
+  };
+
+  const deleteBag = async () => {
+    try {
+      setFetchState("loading");
+      const response = await fetch(`/api/cart`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok)
+        throw new Error("Cart could not be cleared, You can clear it later");
+      setFetchState("success");
+      dispatch(
+        popupActions.showPopup({
+          type: "success",
+          message: "Cart has been cleared",
+        })
+      );
+      dispatch(bagActions.updateBag([]));
+    } catch (error) {
+      setFetchState("fail");
+      dispatch(
+        popupActions.showPopup({ type: "error", message: error.message })
+      );
     }
   };
 
@@ -135,6 +162,7 @@ const useBag = () => {
     bag,
     updateBag,
     deleteFromBag,
+    deleteBag,
   };
 };
 

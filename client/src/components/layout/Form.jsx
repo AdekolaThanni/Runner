@@ -10,6 +10,7 @@ import ForgotPasswordForm from "./ForgotPasswordForm";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import ResetPasswordForm from "./ResetPasswordForm";
+import AddressForm from "./AddressForm";
 
 function Form() {
   const dispatch = useDispatch();
@@ -75,6 +76,7 @@ function Form() {
             {form.type === "resetPassword" && (
               <ResetPasswordForm token={form.payload} />
             )}
+            {form.type === "address" && <AddressForm hideForm={hideForm} />}
           </motion.div>
         </Overlay>
       )}
