@@ -70,13 +70,9 @@ function ProductAction({ productId }) {
       </button>
       <button
         onClick={addToWishlistHandler}
-        className={`secondary-button group ${
-          fetchWishlistState === "loading" && "bg-black"
-        }`}
+        className={`secondary-button group`}
       >
-        {fetchWishlistState === "loading" ? (
-          <Spinner className="w-[2.5rem] h-[2.5rem]" />
-        ) : (
+        {!fetchWishlistState || fetchWishlistState !== "loading" ? (
           <span className="flex items-center gap-xs group">
             Add To Wishlist{" "}
             <svg
@@ -92,6 +88,8 @@ function ProductAction({ productId }) {
               />
             </svg>
           </span>
+        ) : (
+          <Spinner className="w-[2.5rem] h-[2.5rem]" />
         )}
       </button>
     </div>

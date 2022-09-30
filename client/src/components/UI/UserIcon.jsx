@@ -47,6 +47,7 @@ function UserModal({ closeModal }) {
             message: "Logged out successfully",
           })
         );
+        closeModal();
       }
     } catch (error) {
       dispatch(
@@ -64,9 +65,12 @@ function UserModal({ closeModal }) {
         variants={variation}
         className="absolute top-[8.2rem] right-0 w-[45rem] bg-white"
       >
-        <div className="flex flex-col gap-sm border-b border-b-grayFaint p-lg">
+        <div
+          className="flex flex-col gap-sm border-b border-b-grayFaint p-lg"
+          onClick={closeModal}
+        >
           <Link to="/account" className="link">
-            Account
+            My Account
           </Link>
           <Link to="/wishlist" className="link">
             Wishlist

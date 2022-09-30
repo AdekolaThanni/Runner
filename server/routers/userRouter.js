@@ -15,6 +15,7 @@ router.route("/resetPassword/:token").post(userController.resetPassword);
 // The following routes are protected
 router.use(userController.protect);
 
+router.route("/me").get(userController.getUser);
 router.route("/logout").get(userController.logout);
 router.route("/").patch(userController.updateProfile);
 router.route("/updatePassword").post(userController.updatePassword);

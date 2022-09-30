@@ -6,6 +6,8 @@ import { getAllProducts, getSingleProduct } from "./api/products";
 import Product from "./pages/Product";
 import Bag from "./pages/Bag";
 import Wishlist from "./pages/Wishlist";
+import Account from "./pages/Account";
+import { getUser } from "./api/user";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +32,11 @@ const router = createBrowserRouter([
       {
         path: "wishlist",
         element: <Wishlist />,
+      },
+      {
+        path: "account",
+        loader: getUser,
+        element: <Account />,
       },
     ],
   },

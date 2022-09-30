@@ -7,7 +7,7 @@ import { useState } from "react";
 import FormError from "../UI/FormError";
 import Spinner from "../UI/Spinner";
 import { useEffect } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ReviewSchema = Yup.object().shape({
   name: Yup.string().required("Required").min(2, "Too short"),
