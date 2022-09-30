@@ -7,6 +7,7 @@ import Spinner from "../components/UI/Spinner";
 import useBag from "../hooks/useBag";
 import { formActions } from "../stores/appStore/formReducer";
 import ProductInBag from "../components/layout/ProductInBag";
+import { confirmationActions } from "../stores/appStore/confirmationReducer";
 
 function Bag() {
   const { bag, getBag, fetchState, amount } = useBag();
@@ -69,7 +70,14 @@ function Bag() {
               </div>
               <button
                 onClick={() =>
-                  dispatch(formActions.showForm({ type: "address" }))
+                  dispatch(
+                    confirmationActions.askConfirmation({
+                      question:
+                        "Make sure to review the products you've chosen before proceeding, Are you sure you want to proceed to checkout?",
+                      execution: () =>
+                        dispatch(formActions.showForm({ type: "address" })),
+                    })
+                  )
                 }
                 className="primary-button w-full"
               >

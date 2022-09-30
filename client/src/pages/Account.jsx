@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 import { Await, useLoaderData, useNavigate } from "react-router-dom";
 import Divider from "../components/UI/Divider";
@@ -237,6 +238,11 @@ function Account() {
           errorElement={<h2>Could not get your data</h2>}
           children={(user) => (
             <>
+              <Helmet>
+                <title>
+                  Runner | {user.firstName} {user.lastName}
+                </title>
+              </Helmet>
               <div className="flex">
                 <Profile user={user} />
                 <Secuirity />
