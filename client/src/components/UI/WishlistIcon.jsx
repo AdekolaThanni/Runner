@@ -33,7 +33,7 @@ function WishlistIcon() {
         />
       </svg>
       {!!wishlist.length && (
-        <div className="absolute bottom-[-5px] right-[-7px] bg-red-600 rounded-full flex items-center justify-center min-w-[1.5rem] min-h-[1.5rem] text-[1rem] ">
+        <div className="absolute bottom-[-10px] right-[-10px] bg-red-600 rounded-full flex items-center justify-center min-w-[2rem] min-h-[2rem] text-[1.1rem] leading-none">
           {wishlist.length}
         </div>
       )}

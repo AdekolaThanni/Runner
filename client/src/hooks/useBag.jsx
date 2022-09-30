@@ -6,7 +6,9 @@ import { popupActions } from "../stores/appStore/popupReducer";
 const useBag = () => {
   const [fetchState, setFetchState] = useState();
   const bag = useSelector((state) => state.bagReducer);
-  const amount = useSelector((state) => state.bagReducer.length);
+  const amount = useSelector((state) =>
+    state.bagReducer.reduce((acc, curr) => acc + curr.quantity, 0)
+  );
   const dispatch = useDispatch();
 
   const getBag = async () => {
@@ -92,12 +94,6 @@ const useBag = () => {
 
       if (data.message) throw new Error(data.message);
       setFetchState("success");
-      dispatch(
-        popupActions.showPopup({
-          type: "success",
-          message: "Bag has been updated successfully",
-        })
-      );
       await getBag();
     } catch (error) {
       setFetchState("fail");
@@ -114,12 +110,6 @@ const useBag = () => {
 
       if (!response.ok) throw new Error("Product could not be deleted");
       setFetchState("success");
-      dispatch(
-        popupActions.showPopup({
-          type: "success",
-          message: "Product removed from bag successfully",
-        })
-      );
       await getBag();
     } catch (error) {
       setFetchState("fail");
@@ -139,12 +129,6 @@ const useBag = () => {
       if (!response.ok)
         throw new Error("Cart could not be cleared, You can clear it later");
       setFetchState("success");
-      dispatch(
-        popupActions.showPopup({
-          type: "success",
-          message: "Cart has been cleared",
-        })
-      );
       dispatch(bagActions.updateBag([]));
     } catch (error) {
       setFetchState("fail");
