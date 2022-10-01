@@ -69,12 +69,13 @@ function ReviewStars({ ratingsCount, ratingsAverage, starClass }) {
   return (
     <div className="flex items-center">
       <div className="flex items-center">
-        {ratings.map((rating) => {
-          if (rating === 1) return filledStar;
-          else if (rating === 0.5) return halfFilledStar;
-
-          return emptyStar;
-        })}
+        {ratings.map((rating, index) => (
+          <React.Fragment key={index}>
+            {rating === 1 && filledStar}
+            {rating === 0.5 && halfFilledStar}
+            {rating === 0 && emptyStar}
+          </React.Fragment>
+        ))}
       </div>
     </div>
   );

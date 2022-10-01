@@ -1,13 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
 import Spinner from "./Spinner";
 
-function Image({ src, alt, className }) {
+function Image({ src, alt, className, execution }) {
   const [loaded, setLoaded] = useState(false);
   const imageRef = useRef();
 
   useEffect(() => {
     imageRef.current.addEventListener("load", function () {
       setLoaded(true);
+      execution();
     });
   }, []);
 
