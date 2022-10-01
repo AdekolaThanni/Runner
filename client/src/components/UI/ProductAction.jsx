@@ -21,26 +21,8 @@ function ProductAction({ productId }) {
   };
 
   return (
-    <div className="flex flex-col gap-sm border-y border-y-grayFaint py-lg my-lg">
-      <div className="relative w-[15rem] ">
-        <select
-          ref={quantityRef}
-          //   onClick={() => setDropdownVisible((prevState) => !prevState)}
-          name="quantity"
-          id="quantity"
-          className="w-full h-[5rem] self-start border border-black text-center"
-        >
-          <option value="1" disabled>
-            Qty
-          </option>
-          <option value="1" selected>
-            1
-          </option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
+    <div className="flex flex-col gap-sm border-y border-y-grayFaint py-lg my-lg ">
+      <div className="relative w-[15rem]">
         {/* Arrow */}
         <svg
           width="13"
@@ -56,6 +38,23 @@ function ProductAction({ productId }) {
             fill="black"
           />
         </svg>
+        <select
+          ref={quantityRef}
+          name="quantity"
+          id="quantity"
+          className="w-full h-[5rem] self-start border border-black text-center"
+        >
+          <option value="1" disabled>
+            Qty
+          </option>
+          <option value="1" selected>
+            1
+          </option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
       </div>
 
       <button

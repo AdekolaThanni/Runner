@@ -33,15 +33,16 @@ function ImageGallery({ images }) {
         {/* Image */}
         <div
           className="w-full h-full"
-          onMouseEnter={(event) => {
-            // Get image size
-            const imageElement = event.currentTarget;
-            const { width, height } = imageElement.getBoundingClientRect();
-            setImageDimension([width, height]);
-            setMagnifierVisible(true);
-          }}
-          onMouseLeave={() => {
-            setMagnifierVisible(false);
+          onClick={(event) => {
+            if (magnifierVisibile) {
+              setMagnifierVisible(false);
+            } else {
+              // Get image size
+              const imageElement = event.currentTarget;
+              const { width, height } = imageElement.getBoundingClientRect();
+              setImageDimension([width, height]);
+              setMagnifierVisible(true);
+            }
           }}
           onMouseMove={(event) => {
             // Get image position

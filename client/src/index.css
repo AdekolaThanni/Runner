@@ -44,10 +44,19 @@
     -moz-appearance: none;
     appearance: none;
     z-index: 1000;
+    background-color: transparent !important;
+  }
+
+  textarea {
+    background-color: transparent !important;
   }
 
   label {
-    z-index: 1;
+    z-index: -1;
+  }
+
+  form {
+    z-index: -1;
   }
 }
 
