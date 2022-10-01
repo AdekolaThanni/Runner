@@ -32,7 +32,7 @@ function Selection({ option, type, addOption, removeOption, initialActive }) {
   return (
     <div
       onClick={() => (active ? removeOption() : addOption())}
-      className="flex items-center gap-[2rem] px-[3rem] py-[1rem] hover:bg-lightGray"
+      className="flex items-center gap-[2rem] px-[3rem] py-[1rem] hover:bg-lightGray sm:px-[1.5rem]"
       htmlFor={option}
     >
       <input
@@ -78,10 +78,10 @@ function Dropdown({ placeholder, options, type }) {
   }, []);
 
   return (
-    <div className="relative">
+    <div className="relative xs:flex-grow">
       <div
         onClick={() => setVisibility(true)}
-        className="duration-75 cursor-pointer hover:border-black flex font-bold gap-sm items-center p-xs text-sm border border-grayFaint"
+        className="duration-75 cursor-pointer hover:border-black flex font-bold gap-sm justify-between items-center p-xs text-sm border border-grayFaint"
       >
         <span className="cursor-pointer">{placeholder}</span>
         {/* Arrow */}
@@ -104,8 +104,10 @@ function Dropdown({ placeholder, options, type }) {
         <div
           ref={modal}
           className={`first-letter🧮 py-[1.5rem] absolute ${
-            placeholder === "Sort By" ? "right-0" : "left-0"
-          } top-[5rem] bg-white shadow-sm shadow-black flex flex-col min-w-[30rem] gap-[.5rem] z-50`}
+            placeholder === "Sort By" ? "right-0 sm:left-0" : "left-0"
+          } ${
+            placeholder === "Price" && "xs:-left-[8rem]"
+          } top-[5rem] bg-white shadow-sm shadow-black flex flex-col min-w-[30rem] sm:min-w-[20rem] gap-[.5rem] z-50`}
         >
           {/* Close icon */}
           <svg
@@ -114,7 +116,7 @@ function Dropdown({ placeholder, options, type }) {
             height="2.5rem"
             preserveAspectRatio="xMidYMid meet"
             viewBox="0 0 24 24"
-            className="self-end cursor-pointer mr-[3rem]"
+            className="self-end cursor-pointer mr-[3rem] sm:mr-[1.5rem]"
             onClick={() => setVisibility(false)}
           >
             <path

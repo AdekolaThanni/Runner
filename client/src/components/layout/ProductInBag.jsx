@@ -11,21 +11,21 @@ function ProductInBag({ product, quantity }) {
   const { updateBag, deleteFromBag, fetchState } = useBag();
 
   return (
-    <div className="flex gap-md my-lg relative">
+    <div className="relative flex gap-md my-lg xl:mb-[2rem]  xl:flex-col xl:w-[40rem] xl:gap-lg lg:gap-md   lg:flex-row lg:w-full xs:mb-[2rem]  xs:flex-col xs:w-full xs:gap-lg">
       {fetchState === "loading" && (
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
           <Spinner className="w-[4rem] h-[4rem]" />
         </div>
       )}
       <div
-        className={`w-[30rem] h-[25rem] ${
+        className={`w-[30rem] h-[25rem] xs:h-[35rem] xl:w-full lg:w-[30rem] xs:w-full ${
           fetchState === "loading" && "opacity-10"
         }`}
       >
         <Image
           src={product.images?.[0]}
           alt={product.name}
-          className="w-[30rem] h-[25rem] object-cover"
+          className="w-full h-full object-cover"
         />
       </div>
       <div className={`flex-grow ${fetchState === "loading" && "opacity-10"}`}>

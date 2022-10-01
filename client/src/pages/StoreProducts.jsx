@@ -17,13 +17,14 @@ function StoreProducts() {
       {/* Filter box */}
       <div className="bg-white mt-lg sticky top-0 left-0 z-10">
         <Divider />
-        <div className="flex items-center py-[2rem] gap-lg">
+        <div className="flex items-center gap-lg md:gap-sm">
           <svg
             width="21"
             height="22"
             viewBox="0 0 21 22"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            className=""
           >
             <path
               d="M1 3.70834H5.16667M19.75 3.70834H9.33333M1 11H13.5M19.75 11H17.6667M1 18.2917H3.08333M19.75 18.2917H7.25"
@@ -50,38 +51,40 @@ function StoreProducts() {
               stroke-linecap="round"
             />
           </svg>
-          <Dropdown
-            placeholder="Category"
-            options={["Male", "Female", "Kids"]}
-            type="checkbox"
-          />
-          <Dropdown
-            placeholder="Brand"
-            options={[
-              "Nike",
-              "Puma",
-              "Louis Vuitton",
-              "Skechers",
-              "New Balance",
-            ]}
-            type="checkbox"
-          />
-          <Dropdown
-            placeholder="Price"
-            options={["$50 - $100", "$100 - $150"]}
-            type="radio"
-          />
-          <Dropdown
-            placeholder="Rating"
-            options={["4 and Upwards", "3 and Upwards"]}
-            type="radio"
-          />
-          <div className="ml-auto">
+          <div className="flex items-center py-[2rem] gap-lg md:gap-sm sm:flex-wrap flex-grow">
             <Dropdown
-              placeholder="Sort By"
-              options={["Price Low to High", "Price High to Low"]}
+              placeholder="Category"
+              options={["Male", "Female", "Kids"]}
+              type="checkbox"
+            />
+            <Dropdown
+              placeholder="Brand"
+              options={[
+                "Nike",
+                "Puma",
+                "Louis Vuitton",
+                "Skechers",
+                "New Balance",
+              ]}
+              type="checkbox"
+            />
+            <Dropdown
+              placeholder="Price"
+              options={["$50 - $100", "$100 - $150"]}
               type="radio"
             />
+            <Dropdown
+              placeholder="Rating"
+              options={["4 and Upwards", "3 and Upwards"]}
+              type="radio"
+            />
+            <div className="ml-auto sm:ml-[0] xs:flex-grow">
+              <Dropdown
+                placeholder="Sort By"
+                options={["Price Low to High", "Price High to Low"]}
+                type="radio"
+              />
+            </div>
           </div>
         </div>
         <Divider />

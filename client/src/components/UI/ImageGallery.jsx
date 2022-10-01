@@ -13,9 +13,9 @@ function ImageGallery({ images }) {
   const zoomLevel = 1.5;
 
   return (
-    <div className="flex items-start gap-[2rem]">
+    <div className="flex items-start lg:items-center gap-[2rem] xl:gap-[1rem] lg:gap-md flex-grow lg:w-full lg:flex-col">
       {/* Picker */}
-      <div className="flex flex-col gap-md">
+      <div className="flex flex-col gap-md lg:flex-row">
         {images.map((image) => (
           <div
             onClick={() => setActiveSrc(image)}
@@ -29,7 +29,7 @@ function ImageGallery({ images }) {
       </div>
 
       {/* Display */}
-      <div className="w-[80rem] h-[65rem] relative overflow-hidden">
+      <div className="basis-[80rem] lg:basis-[65rem] xs:basis-[40rem] lg:order-first lg:w-full h-[65rem] relative overflow-hidden">
         {/* Image */}
         <div
           className="w-full h-full"

@@ -153,7 +153,7 @@ function Secuirity() {
   };
 
   return (
-    <div className="border-l border-l-grayFaint flex-grow px-xl ml-xl py-xl">
+    <div className="border-l border-l-grayFaint flex-grow px-xl ml-xl py-xl lg:px-sm lg:ml-sm sm:border-none sm:ml-0 sm:py-md sm:px-0">
       <h2>Update Password</h2>
       <form
         className="mt-lg flex flex-col gap-lg"
@@ -224,14 +224,14 @@ function Account() {
       navigate("/");
       dispatch(formActions.showForm({ type: "login" }));
     }
-  }, []);
+  }, [loggedIn]);
 
   return (
     <>
       <h1>My account</h1>
       <Divider className="mt-xl" />
       <React.Suspense
-        fallback={<Spinner className="w-[7rem] h-[7rem] mx-auto" />}
+        fallback={<Spinner className="w-[7rem] h-[7rem] mx-auto mt-xl" />}
       >
         <Await
           resolve={user}
@@ -243,11 +243,11 @@ function Account() {
                   Runner | {user.firstName} {user.lastName}
                 </title>
               </Helmet>
-              <div className="flex">
+              <div className="flex sm:flex-col">
                 <Profile user={user} />
                 <Secuirity />
               </div>
-              <Divider />
+              <Divider className="sm:hidden" />
             </>
           )}
         />

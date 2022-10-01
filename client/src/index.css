@@ -4,7 +4,7 @@
 
 @layer base {
   html {
-    @apply !text-[62.5%];
+    @apply text-[62.5%] md:text-[50%];
   }
 
   body {
@@ -51,11 +51,11 @@
     background-color: transparent !important;
   }
 
-  label {
+  form {
     z-index: -1;
   }
 
-  form {
+  form > label {
     z-index: -1;
   }
 }

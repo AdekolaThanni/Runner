@@ -20,7 +20,7 @@ function WishlistController({ productId }) {
         height="1em"
         preserveAspectRatio="xMidYMid meet"
         viewBox="0 0 1024 1024"
-        className="w-[2rem] h-[2rem] absolute top-[3rem] right-[3rem]"
+        className="w-[2rem] h-[2rem] absolute top-[1rem] right-[3rem]"
       >
         <path
           fill="currentColor"
@@ -38,8 +38,7 @@ function SingleProduct({ product }) {
       to={`/products/${product._id}`}
       className="hover:-translate-y-sm hover:scale-105 cursor-pointer duration-200 ease-out font-semibold flex flex-col space-y-xs relative"
     >
-      <WishlistController productId={product._id} />
-      <div className="h-[35rem]">
+      <div className="h-[35rem] sm:h-[25rem] xs:h-[20rem] w-full">
         <Image
           src={product.images[0]}
           alt={product.name}
@@ -52,6 +51,7 @@ function SingleProduct({ product }) {
         ratingsCount={product.ratingsCount}
         ratingsAverage={product.ratingsAverage}
       />
+      <WishlistController productId={product._id} />
     </Link>
   );
 }

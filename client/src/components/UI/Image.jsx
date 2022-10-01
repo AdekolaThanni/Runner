@@ -8,7 +8,7 @@ function Image({ src, alt, className, execution }) {
   useEffect(() => {
     imageRef.current.addEventListener("load", function () {
       setLoaded(true);
-      execution();
+      return execution && execution();
     });
   }, []);
 

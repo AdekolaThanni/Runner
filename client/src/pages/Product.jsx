@@ -20,55 +20,64 @@ function ProductData() {
         <meta name="description" content={product.details.description} />
       </Helmet>
       {/* Top */}
-      <div className="flex items-start gap-[5rem]">
-        <ImageGallery images={product.images} />
-        <div className="w-[45rem]">
-          <h1 className="">{product.name}</h1>
-          <p className="capitalize font-semibold text-[1.7rem]">
-            {product.brand} - Men
-          </p>
-          <p className="text-lg font-bold mt-xs">${product.price.toFixed(2)}</p>
-          <ProductAction productId={product._id} />
-          <p className="text-darkGray">
-            {product.details.description.slice(0, 300)}...
-          </p>
-          <div className="flex items-center my-md gap-md">
-            <span className="font-bold">Reviews ({product.ratingsCount})</span>
-            <ReviewStars
-              ratingsCount={product.ratingsCount}
-              ratingsAverage={product.ratingsAverage}
-            />
-          </div>
-          <div className="flex justify-between items-center">
-            <button
-              className="link"
-              onClick={() => {
-                const { top, left } =
-                  detailsRef.current.getBoundingClientRect();
-                window.scrollTo({
-                  left,
-                  top,
-                  behavior: "smooth",
-                });
-              }}
-            >
-              View full details
-            </button>
-            <button
-              onClick={() =>
-                dispatch(
-                  formActions.showForm({ type: "review", payload: product._id })
-                )
-              }
-              className="link"
-            >
-              Write review
-            </button>
+      <div className="">
+        <div className="flex items-start gap-[1.5rem] lg:gap-[3.5rem] lg:flex-col max-w-[138rem] overflow-x-hidden">
+          <ImageGallery images={product.images} />
+          <div className="w-[45rem] xl:w-[40rem] shrink-0 ml-auto lg:ml-0 lg:w-full">
+            <h1 className="">{product.name}</h1>
+            <p className="capitalize font-semibold text-[1.7rem]">
+              {product.brand} - Men
+            </p>
+            <p className="text-lg font-bold mt-xs">
+              ${product.price.toFixed(2)}
+            </p>
+            <ProductAction productId={product._id} />
+            <p className="text-darkGray">
+              {product.details.description.slice(0, 300)}...
+            </p>
+            <div className="flex items-center my-md gap-md">
+              <span className="font-bold">
+                Reviews ({product.ratingsCount})
+              </span>
+              <ReviewStars
+                ratingsCount={product.ratingsCount}
+                ratingsAverage={product.ratingsAverage}
+              />
+            </div>
+            <div className="flex justify-between items-center">
+              <button
+                className="link"
+                onClick={() => {
+                  const { top, left } =
+                    detailsRef.current.getBoundingClientRect();
+                  window.scrollTo({
+                    left,
+                    top,
+                    behavior: "smooth",
+                  });
+                }}
+              >
+                View full details
+              </button>
+              <button
+                onClick={() =>
+                  dispatch(
+                    formActions.showForm({
+                      type: "review",
+                      payload: product._id,
+                    })
+                  )
+                }
+                className="link"
+              >
+                Write review
+              </button>
+            </div>
           </div>
         </div>
       </div>
       {/* Bottom */}
-      <div className="mt-[12rem] w-[65rem]" ref={detailsRef} id="details">
+      <div className="mt-[12rem] max-w-[65rem]" ref={detailsRef} id="details">
         <h2>Product Story</h2>
         <p className="text-darkGray border-b border-grayFaint pb-[3rem] mb-[3rem]">
           {product.details.description}

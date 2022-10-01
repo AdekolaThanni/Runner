@@ -8,7 +8,7 @@ function Overlay({ children, hideOverlay }) {
   useEffect(() => {
     overlayRef.current.addEventListener("click", (event) => {
       if (event.target.id === "overlayVisual") {
-        hideOverlay();
+        return hideOverlay && hideOverlay();
       }
     });
   }, []);
@@ -42,7 +42,7 @@ function Overlay({ children, hideOverlay }) {
       animate="visible"
       exit="exit"
       id="overlayVisual"
-      className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-[rgba(0,0,0,.3)] z-[10000]"
+      className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center px-xs bg-[rgba(0,0,0,.3)] z-[10000]"
     >
       {children}
     </motion.div>,

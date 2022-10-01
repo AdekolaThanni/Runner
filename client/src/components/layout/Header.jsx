@@ -54,7 +54,7 @@ function Header() {
     }
   }, []);
   return (
-    <header className="bg-black text-white px-[5rem] py-[2rem] flex justify-between items-center mb-xl">
+    <header className="bg-black text-white xl:px-[2rem] px-[5rem] py-[2rem] flex justify-between items-center mb-xl xs:mb-[8rem] relative">
       <Logo />
       <div className="flex items-center gap-[2.5rem]">
         <SearchBar />

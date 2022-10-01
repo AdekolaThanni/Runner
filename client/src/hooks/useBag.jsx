@@ -53,7 +53,7 @@ const useBag = () => {
       if (!response.ok)
         throw new Error("Please check your internet connection...");
 
-      const formerLength = amount;
+      const formerLength = bag.length;
       const data = await response.json();
       if (data.data.cart.products.length === formerLength) {
         throw new Error("Product is in bag already");

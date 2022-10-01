@@ -39,7 +39,7 @@ function Products({ products, results, uniqueKey }) {
         <h1 className="text-md">
           {results ? `${results} Products` : "No Products Found"}
         </h1>
-        <div className="grid grid-cols-3 gap-[3rem] my-md">
+        <div className="grid lg:grid-cols-2 grid-cols-3 gap-[3rem] my-md">
           {allProducts.map((product, index) => (
             <SingleProduct key={index} product={product} />
           ))}

@@ -185,23 +185,23 @@ function ReviewForm({ productId, hideForm }) {
                     errors.rating && touched.rating && "red-svg"
                   }`}
                 >
-                  <label className="">
+                  <label className="!z-0">
                     <Field name="rating" type="radio" value={1} />
                     <Star ratingValue={values.rating} starValue={1} />
                   </label>
-                  <label className="">
+                  <label className="!z-0">
                     <Field name="rating" type="radio" value={2} />
                     <Star ratingValue={values.rating} starValue={2} />
                   </label>
-                  <label className="">
+                  <label className="!z-0">
                     <Field name="rating" type="radio" value={3} />
                     <Star ratingValue={values.rating} starValue={3} />
                   </label>
-                  <label className="">
+                  <label className="!z-0">
                     <Field name="rating" type="radio" value={4} />
                     <Star ratingValue={values.rating} starValue={4} />
                   </label>
-                  <label className="">
+                  <label className="!z-0">
                     <Field name="rating" type="radio" value={5} />
                     <Star ratingValue={values.rating} starValue={5} />
                   </label>

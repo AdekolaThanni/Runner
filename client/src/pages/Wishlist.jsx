@@ -62,7 +62,7 @@ function Wishlist() {
         <>
           <h1 className="">My Wishlist ({wishlist.length})</h1>
           <Divider className="mt-lg" />
-          <div className="grid grid-cols-3 gap-[5rem] my-md">
+          <div className="grid lg:grid-cols-2 sm:gap-[2rem] grid-cols-3 gap-[5rem] my-md">
             {wishlist.map((product) => (
               <WishlistProduct product={product} />
             ))}

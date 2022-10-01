@@ -21,7 +21,7 @@ function App() {
       <GlobalPopup />
       <Confirmation />
       <Form />
-      <main className="min-h-[95vh] relative px-[5rem]">
+      <main className="min-h-[95vh] relative px-[5rem] xl:px-[2rem]">
         <Outlet />
       </main>
       <Footer />
