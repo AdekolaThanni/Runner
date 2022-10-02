@@ -10,7 +10,7 @@ exports.getAllProducts = catchErrors(async (req, res, next) => {
     .filter()
     .sort()
     .limitFields()
-    .paginate(18).query;
+    .paginate(12).query;
 
   const results = await new apiQuery(Products, req.query)
     .search()
@@ -61,12 +61,13 @@ exports.getProductReviews = catchErrors(async (req, res, next) => {
 });
 
 exports.createProductReview = catchErrors(async (req, res, next) => {
-  const { name, comment, rating } = req.body;
+  const { name, comment, rating, date } = req.body;
   const product = await Products.findById(req.params.id);
   const review = await Review.create({
     name: name || req.user.firstName,
     comment,
     rating,
+    date: date || Date.now(),
     product: product._id,
     user: req.user._id,
   });

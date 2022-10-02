@@ -99,7 +99,14 @@ function Product() {
 
   return (
     <React.Suspense fallback={<ProductsSkeletons />}>
-      <Await resolve={data.product}>
+      <Await
+        resolve={data.product}
+        errorElement={
+          <h1 className="text-brown text-[5rem] text-center mt-[10rem]">
+            Could not get product
+          </h1>
+        }
+      >
         <ProductData />
       </Await>
     </React.Suspense>

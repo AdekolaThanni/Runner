@@ -54,7 +54,7 @@ function StoreProducts() {
           <div className="flex items-center py-[2rem] gap-lg md:gap-sm sm:flex-wrap flex-grow">
             <Dropdown
               placeholder="Category"
-              options={["Male", "Female", "Kids"]}
+              options={["Men", "Women", "Kids"]}
               type="checkbox"
             />
             <Dropdown

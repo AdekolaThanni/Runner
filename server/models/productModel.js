@@ -6,6 +6,10 @@ const Schema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  category: {
+    type: String,
+    required: true,
+  },
   price: {
     type: Number,
     required: true,
@@ -23,7 +27,7 @@ const Schema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  ratingsAverage: Number,
+  ratingsAverage: { type: Number, default: 0 },
   images: [String],
 });
 

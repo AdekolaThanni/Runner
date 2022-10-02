@@ -235,7 +235,9 @@ function Account() {
       >
         <Await
           resolve={user}
-          errorElement={<h2>Could not get your data</h2>}
+          errorElement={
+            <h2 className="text-brown mt-lg">Could not get your data</h2>
+          }
           children={(user) => (
             <>
               <Helmet>

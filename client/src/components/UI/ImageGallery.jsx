@@ -90,7 +90,7 @@ function ImageGallery({ images }) {
               -magnifierY * zoomLevel + magnifierHeight / 2
             }px`,
           }}
-          className="rounded-full backdrop-blur-md"
+          className="rounded-full backdrop-blur-md md:!hidden"
         ></div>
       </div>
     </div>

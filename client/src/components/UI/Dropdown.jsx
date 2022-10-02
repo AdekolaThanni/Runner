@@ -104,9 +104,11 @@ function Dropdown({ placeholder, options, type }) {
         <div
           ref={modal}
           className={`first-letter🧮 py-[1.5rem] absolute ${
-            placeholder === "Sort By" ? "right-0 sm:left-0" : "left-0"
-          } ${
-            placeholder === "Price" && "xs:-left-[8rem]"
+            placeholder === "Sort By"
+              ? "right-0 sm:left-0"
+              : placeholder === "Category"
+              ? "left-0"
+              : "right-0"
           } top-[5rem] bg-white shadow-sm shadow-black flex flex-col min-w-[30rem] sm:min-w-[20rem] gap-[.5rem] z-50`}
         >
           {/* Close icon */}

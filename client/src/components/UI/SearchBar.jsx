@@ -27,7 +27,7 @@ function SearchBar() {
         event.preventDefault();
         searchFilter(searchValue);
       }}
-      className="border border-darkGray flex items-center px-xs gap-sm !z-0 xs:absolute xs:-bottom-[4.3rem] xs:left-0 xs:w-screen xs:border-none xs:bg-brown"
+      className="border border-darkGray flex items-center px-xs gap-sm !z-0 xs:absolute xs:-bottom-[5.3rem] xs:left-0 xs:w-screen xs:border-none xs:bg-brown"
     >
       {/* Search Icon */}
       <div className="">
@@ -47,7 +47,7 @@ function SearchBar() {
       </div>
       <input
         type="text"
-        className="bg-transparent flex-grow py-[1rem] placeholder:text-[#ffffffad] focus:outline-none uppercase"
+        className="bg-transparent flex-grow py-[1rem] xs:py-[1.5rem] placeholder:text-[#ffffffad] focus:outline-none uppercase"
         placeholder="SEARCH RUNNER"
         value={searchValue}
         onChange={(event) => setSearchValue(event.target.value)}

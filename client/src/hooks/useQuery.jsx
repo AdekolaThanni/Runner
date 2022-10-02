@@ -7,8 +7,11 @@ const useQuery = () => {
   const dispatch = useDispatch();
 
   const addQueryOperation = (filter, option) => {
-    if (filter === "category" || filter === "brand") {
+    if (filter === "brand") {
       return searchParams.append(filter, option.toLowerCase());
+    }
+    if (filter === "category") {
+      return searchParams.append(filter, option);
     }
     if (filter === "price") {
       const [lower, upper] = option

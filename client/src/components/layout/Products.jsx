@@ -9,7 +9,7 @@ function Products({ products, results, uniqueKey }) {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const addProducts = async () => {
-    const productsPerPage = 18;
+    const productsPerPage = 12;
     const totalPages = Math.ceil(results / productsPerPage);
     const currentPage = searchParams.get("page") * 1;
     const nextPage = currentPage ? currentPage + 1 : 2;

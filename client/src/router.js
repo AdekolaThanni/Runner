@@ -9,6 +9,7 @@ import Wishlist from "./pages/Wishlist";
 import Account from "./pages/Account";
 import { getUser } from "./api/user";
 import Form from "./components/layout/Form";
+import NotFoundPage from "./pages/NotFoundPage";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "resetPassword/:token",
         element: <Form />,
+      },
+      {
+        path: "*",
+        element: <NotFoundPage />,
       },
     ],
   },
