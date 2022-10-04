@@ -29,8 +29,8 @@ exports.takePayment = catchErrors(async (req, res, next) => {
     payment_method_types: ["card"],
     mode: "payment",
     line_items: products,
-    success_url: `${process.env.CLIENT_URL}/bag?success=true`,
-    cancel_url: `${process.env.CLIENT_URL}/bag?canceled=true`,
+    success_url: `/bag?success=true`,
+    cancel_url: `/bag?canceled=true`,
   });
 
   res.status(200).json({

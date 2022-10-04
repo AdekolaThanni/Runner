@@ -27,7 +27,7 @@ function SearchBar() {
         event.preventDefault();
         searchFilter(searchValue);
       }}
-      className="border border-darkGray flex items-center px-xs gap-sm !z-0 xs:absolute xs:-bottom-[5.3rem] xs:left-0 xs:w-screen xs:border-none xs:bg-brown"
+      className="border border-darkGray flex items-center px-xs gap-sm !z-0 xs:absolute xs:-bottom-[5.2rem] xs:left-0 xs:w-screen xs:border-none xs:bg-brown"
     >
       {/* Search Icon */}
       <div className="">

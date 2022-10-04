@@ -233,7 +233,7 @@ function RegistrationForm({ hideForm }) {
                 )}
               </button>
             </Form>
-            <div className="mt-sm">
+            <div className="mt-auto">
               Already have an account?{" "}
               <button
                 className="link"
