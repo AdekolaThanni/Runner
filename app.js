@@ -53,11 +53,11 @@ app.post("/api/checkout", takePayment);
 app.use(errorController);
 
 // Not found
-app.use("*", (req, res) => {
-  res.status(404).json({
-    status: "fail",
-    message: "Path not found on server",
-  });
-});
+// app.use("*", (req, res) => {
+//   res.status(404).json({
+//     status: "fail",
+//     message: "Path not found on server",
+//   });
+// });
 
 module.exports = app;
