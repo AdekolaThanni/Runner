@@ -22,7 +22,7 @@ exports.getCart = catchErrors(async (req, res, next) => {
 
   const cart = await Cart.findById(cartId).populate(
     "products.product",
-    "name price brand gender images"
+    "name price brand gender images category"
   );
 
   res.status(200).json({

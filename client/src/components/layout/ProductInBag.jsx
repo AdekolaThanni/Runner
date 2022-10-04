@@ -4,6 +4,7 @@ import Image from "../UI/Image";
 import { confirmationActions } from "../../stores/appStore/confirmationReducer";
 import useBag from "../../hooks/useBag";
 import Spinner from "../UI/Spinner";
+import { Link } from "react-router-dom";
 
 function ProductInBag({ product, quantity }) {
   const [quantityVal, setQuantityVal] = useState(quantity);
@@ -17,17 +18,18 @@ function ProductInBag({ product, quantity }) {
           <Spinner className="w-[4rem] h-[4rem]" />
         </div>
       )}
-      <div
+      <Link
         className={`w-[30rem] h-[25rem] xs:h-[35rem] xl:w-full lg:w-[30rem] xs:w-full ${
           fetchState === "loading" && "opacity-10"
         }`}
+        to={`/products/${product._id}`}
       >
         <Image
           src={product.images?.[0]}
           alt={product.name}
           className="w-full h-full object-cover"
         />
-      </div>
+      </Link>
       <div className={`flex-grow ${fetchState === "loading" && "opacity-10"}`}>
         <div className="flex justify-between">
           <h3>{product.name}</h3>
@@ -35,7 +37,9 @@ function ProductInBag({ product, quantity }) {
             ${(quantity * product.price).toFixed(2)}
           </p>
         </div>
-        <p className="capitalize mb-md">{product.brand} - Men</p>
+        <p className="capitalize mb-md">
+          {product.brand} - {product.category}
+        </p>
         <div className="flex items-center justify-between">
           <span className="flex items-center gap-sm">
             Quantity:

@@ -13,12 +13,13 @@ process.on("unhandledException", (err) => {
 
 // Connect to database
 mongoose
-  .connect(process.env.DATABASE_URL)
+  .connect(process.env.MONGODB_URI || process.env.DATABASE_URL)
   .then(() => console.log("Database connected..."))
   .catch((err) => console.log(err));
 
 // Listen to requests
-const server = app.listen(4000, () =>
+const PORT = process.env.PORT || 4000;
+const server = app.listen(PORT, () =>
   console.log("Server listening to requests from port 4000...")
 );
 

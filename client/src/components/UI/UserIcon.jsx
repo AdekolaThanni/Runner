@@ -63,7 +63,7 @@ function UserModal({ closeModal }) {
     <Overlay hideOverlay={closeModal}>
       <motion.div
         variants={variation}
-        className="absolute top-[8.45rem] xs:top-[7rem] right-0 w-[45rem] bg-white"
+        className="absolute top-[8.45rem] xs:top-[6.1rem] right-0 w-[45rem] bg-white"
       >
         <div
           className="flex flex-col gap-sm border-b border-b-grayFaint p-lg"

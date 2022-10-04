@@ -26,7 +26,7 @@ function ProductData() {
           <div className="w-[45rem] xl:w-[40rem] shrink-0 ml-auto lg:ml-0 lg:w-full">
             <h1 className="">{product.name}</h1>
             <p className="capitalize font-semibold text-[1.7rem]">
-              {product.brand} - Men
+              {product.brand} - {product.category}
             </p>
             <p className="text-lg font-bold mt-xs">
               ${product.price.toFixed(2)}
