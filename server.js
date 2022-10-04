@@ -1,6 +1,8 @@
+const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const app = require("./app");
+const path = require("path");
 
 // Configure environment files
 dotenv.config({ path: "./.env" });
@@ -13,9 +15,15 @@ process.on("unhandledException", (err) => {
 
 // Connect to database
 mongoose
-  .connect(process.env.MONGODB_URI || process.env.DATABASE_URL)
+  .connect(process.env.DATABASE_URL)
   .then(() => console.log("Database connected..."))
   .catch((err) => console.log(err));
+
+app.use(express.static(path.join(__dirname, "client", "build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 
 // Listen to requests
 const PORT = process.env.PORT || 4000;
