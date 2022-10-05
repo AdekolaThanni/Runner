@@ -1,6 +1,5 @@
 const express = require("express");
 const rateLimit = require("express-rate-limit");
-const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 // const hpp = require("hpp");
@@ -13,15 +12,6 @@ const errorController = require("./controllers/errorController");
 const { takePayment } = require("./controllers/paymentController");
 
 const app = express();
-
-// Secure requests
-app.use(
-  helmet({
-    contentSecurityPolicy: false,
-  })
-);
-
-app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 
 // Limit request limit
 app.use(
