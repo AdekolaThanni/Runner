@@ -15,9 +15,14 @@ const LoginSchema = Yup.object().shape({
 
 function LoginForm({ hideForm }) {
   const [loggingUserIn, setLoggingUserIn] = useState(false);
+  const [loggingDemoUserIn, setLoggingDemoUserIn] = useState(false);
   const dispatch = useDispatch();
   const loginUser = async (values) => {
-    setLoggingUserIn(true);
+    if (values.email === "demouser@gmail.com") {
+      setLoggingDemoUserIn(true);
+    } else {
+      setLoggingUserIn(true);
+    }
     const response = await fetch("/api/users/login", {
       method: "POST",
       headers: {
@@ -42,6 +47,7 @@ function LoginForm({ hideForm }) {
     }
 
     setLoggingUserIn(false);
+    setLoggingDemoUserIn(false);
     dispatch(authActions.setLoggedInState({ loggedIn: true }));
 
     hideForm();
@@ -125,6 +131,21 @@ function LoginForm({ hideForm }) {
                   <Spinner className="w-[2.5rem] h-[2.5rem]" />
                 ) : (
                   "Login To Account"
+                )}
+              </button>
+              <button
+                onClick={() => {
+                  values.email = "demouser@gmail.com";
+                  values.password = "demopassword";
+                  loginUser(values);
+                }}
+                className={`secondary-button mt-xs`}
+                type="submit"
+              >
+                {loggingDemoUserIn ? (
+                  <Spinner className="w-[2.5rem] h-[2.5rem]" />
+                ) : (
+                  "Login as Demo user"
                 )}
               </button>
             </Form>

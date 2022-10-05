@@ -25,6 +25,17 @@ function Profile({ user }) {
       )
         return;
 
+      if (user.email === "demouser@gmail.com") {
+        setFirstName(user.firstName);
+        setLastName(user.lastName);
+        setEmail(user.email);
+        return dispatch(
+          popupActions.showPopup({
+            type: "error",
+            message: "You can't edit this account",
+          })
+        );
+      }
       setUpdatingProfile(true);
       const response = await fetch("/api/users", {
         method: "PATCH",
@@ -114,7 +125,7 @@ function Profile({ user }) {
   );
 }
 
-function Secuirity() {
+function Secuirity({ user }) {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
@@ -123,6 +134,17 @@ function Secuirity() {
 
   const updatePassword = async () => {
     try {
+      if (user.email === "demouser@gmail.com") {
+        setCurrentPassword("");
+        setNewPassword("");
+        setConfirmNewPassword("");
+        return dispatch(
+          popupActions.showPopup({
+            type: "error",
+            message: "You can't edit this account",
+          })
+        );
+      }
       setUpdatingPassword(true);
       const response = await fetch("/api/users/updatePassword", {
         method: "POST",
@@ -247,7 +269,7 @@ function Account() {
               </Helmet>
               <div className="flex sm:flex-col">
                 <Profile user={user} />
-                <Secuirity />
+                <Secuirity user={user} />
               </div>
               <Divider className="sm:hidden" />
             </>

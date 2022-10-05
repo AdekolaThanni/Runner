@@ -34,7 +34,7 @@ app.use(cookieParser());
 app.use(mongoSanitize());
 
 // Cross site cleaning to prevent malicious html codes
-app.use(xss());
+// app.use(xss());
 
 // Add body to requests
 app.use(
