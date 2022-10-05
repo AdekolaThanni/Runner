@@ -48,6 +48,10 @@ Users should be able to:
 
 ![](./screenshots/Runner%20Account%20Page.png)
 
+#### Checkout page
+
+![](./screenshots/Runner%20Checkout%20Page.png)
+
 ### Links
 
 - Solution URL: [View solution URL here](https://github.com/AdekolaThanni/Runner)
