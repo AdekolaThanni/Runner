@@ -18,9 +18,10 @@ const app = express();
 app.use(
   helmet({
     contentSecurityPolicy: false,
-    crossOriginResourcePolicy: { policy: "cross-origin" },
   })
 );
+
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 
 // Limit request limit
 app.use(
