@@ -35,9 +35,10 @@ const useQuery = () => {
   const deleteQueryOperation = (filter, option) => {
     if (filter === "category" || filter === "brand") {
       let options = searchParams.getAll(filter);
-      console.log(options);
       searchParams.delete(filter);
-      options = options.filter((opt) => opt !== option.toLowerCase());
+      options = options.filter(
+        (opt) => opt.toLowerCase() !== option.toLowerCase()
+      );
       options.forEach((opt) => searchParams.append(filter, opt));
       return;
     }
