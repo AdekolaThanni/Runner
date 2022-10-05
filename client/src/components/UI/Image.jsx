@@ -19,6 +19,7 @@ function Image({ src, alt, className, execution }) {
         src={src}
         alt={alt}
         className={`${!loaded && "hidden"} ${className}`}
+        crossOrigin
       />
       {!loaded && (
         <div
