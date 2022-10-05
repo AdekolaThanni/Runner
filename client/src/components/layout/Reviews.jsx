@@ -95,6 +95,7 @@ function Reviews({ productId }) {
               {new Date(review.date).toLocaleDateString("en-US", {
                 month: "long",
                 day: "2-digit",
+                year: "2-digit",
               })}
             </span>
           </div>
