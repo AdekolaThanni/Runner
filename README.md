@@ -28,10 +28,24 @@ Users should be able to:
 
 ### Screenshots
 
+#### Homepage
+
 ![](./screenshots/Runner%20Homepage.png)
+
+#### Product Page
+
 ![](./screenshots/Runner%20Product%20Page.png)
+
+#### Bag page (Cart)
+
 ![](./screenshots/Runner%20Bag%20Page.png)
+
+#### Wishlist Page
+
 ![](./screenshots/Runner%20Wishlist%20page.png)
+
+#### User Account page
+
 ![](./screenshots/Runner%20Account%20Page.png)
 
 ### Links
